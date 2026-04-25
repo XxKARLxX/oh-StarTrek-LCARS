@@ -53,4 +53,17 @@ oh-StarTrek-LCARS 是星际迷航风格的虎鲸笔记插件套件，以星舰�
 
 ---
 
+## 🔗 相关项目
+
+- 🖖 **oh-StarTrek 主题** — [github.com/XxKARLxX/oh-StarTrek](https://github.com/XxKARLxX/oh-StarTrek)  
+  星际迷航风格虎鲸笔记主题，星空画布 + 跃迁动画
+
+- 🐋 **虎鲸笔记** — [github.com/sethyuan/orca-note](https://github.com/sethyuan/orca-note)  
+  Orca Note 官方仓库
+
+- 📚 **Awesome OrcaNote** — [github.com/sethyuan/awesome-orcanote](https://github.com/sethyuan/awesome-orcanote)  
+  虎鲸笔记插件与资源合集
+
+---
+
 *"Setting course for productivity. Engage."*
