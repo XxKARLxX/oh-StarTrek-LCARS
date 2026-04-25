@@ -1,12 +1,12 @@
 let Jt = "en", Gt = {};
-function Yi(i, e) {
+function Ki(i, e) {
   Jt = i, Gt = e;
 }
 function B(i, e, o) {
   var l;
   return ((l = Gt[o ?? Jt]) == null ? void 0 : l[i]) ?? i;
 }
-const Ki = {
+const Yi = {
   "settings-pin.pin": "固定到侧边栏",
   "settings-pin.unpin": "取消固定",
   "settings-pin.search-icons": "搜索图标...",
@@ -114,10 +114,15 @@ function Xi(i) {
   return i.isPlugin && i.pluginName ? { type: "plugin", pluginName: i.pluginName, settingKey: String(i.key) } : { type: "app", appKey: Number(i.key) };
 }
 const Qi = [
+  // 快捷键设置面板（无有效开关）
   { type: "section", value: "快捷键" },
+  { type: "section", value: "Keyboard shortcuts" },
+  // 调试模式（内部调试用，不应钉选）
   { type: "settingName", value: "调试模式" },
-  { type: "settingName", value: "启用插件" }
-  // 插件的启用/禁用开关，钉选后点击无效
+  { type: "settingName", value: "Debug mode" },
+  // 启用插件（钉选后点击无效，虎鲸内部处理）
+  { type: "settingName", value: "启用插件" },
+  { type: "settingName", value: "Enable plugin" }
 ];
 function Ht(i, e = Qi) {
   if (i.controlType !== "switch")
@@ -191,10 +196,10 @@ function ae(i, e, o, n) {
 }
 var ti = { exports: {} };
 const le = React;
-var W = {}, Yt;
+var W = {}, Kt;
 function se() {
-  if (Yt) return W;
-  Yt = 1;
+  if (Kt) return W;
+  Kt = 1;
   /**
    * @license React
    * react-jsx-runtime.development.js
@@ -205,11 +210,11 @@ function se() {
    * LICENSE file in the root directory of this source tree.
    */
   return function() {
-    var i = le, e = Symbol.for("react.element"), o = Symbol.for("react.portal"), n = Symbol.for("react.fragment"), l = Symbol.for("react.strict_mode"), c = Symbol.for("react.profiler"), g = Symbol.for("react.provider"), y = Symbol.for("react.context"), f = Symbol.for("react.forward_ref"), b = Symbol.for("react.suspense"), k = Symbol.for("react.suspense_list"), R = Symbol.for("react.memo"), S = Symbol.for("react.lazy"), L = Symbol.for("react.offscreen"), N = Symbol.iterator, Y = "@@iterator";
+    var i = le, e = Symbol.for("react.element"), o = Symbol.for("react.portal"), n = Symbol.for("react.fragment"), l = Symbol.for("react.strict_mode"), c = Symbol.for("react.profiler"), g = Symbol.for("react.provider"), y = Symbol.for("react.context"), f = Symbol.for("react.forward_ref"), b = Symbol.for("react.suspense"), k = Symbol.for("react.suspense_list"), R = Symbol.for("react.memo"), S = Symbol.for("react.lazy"), L = Symbol.for("react.offscreen"), N = Symbol.iterator, K = "@@iterator";
     function G(t) {
       if (t === null || typeof t != "object")
         return null;
-      var r = N && t[N] || t[Y];
+      var r = N && t[N] || t[K];
       return typeof r == "function" ? r : null;
     }
     var D = i.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
@@ -294,13 +299,13 @@ function se() {
         }
       return null;
     }
-    var A = Object.assign, K = 0, yt, wt, kt, St, xt, Et, Pt;
+    var A = Object.assign, Y = 0, yt, wt, kt, St, xt, Et, Pt;
     function Rt() {
     }
     Rt.__reactDisabledLog = !0;
     function mi() {
       {
-        if (K === 0) {
+        if (Y === 0) {
           yt = console.log, wt = console.info, kt = console.warn, St = console.error, xt = console.group, Et = console.groupCollapsed, Pt = console.groupEnd;
           var t = {
             configurable: !0,
@@ -318,12 +323,12 @@ function se() {
             groupEnd: t
           });
         }
-        K++;
+        Y++;
       }
     }
     function hi() {
       {
-        if (K--, K === 0) {
+        if (Y--, Y === 0) {
           var t = {
             configurable: !0,
             enumerable: !0,
@@ -353,7 +358,7 @@ function se() {
             })
           });
         }
-        K < 0 && h("disabledDepth fell below zero. This is a bug in React. Please file an issue.");
+        Y < 0 && h("disabledDepth fell below zero. This is a bug in React. Please file an issue.");
       }
     }
     var nt = D.ReactCurrentDispatcher, at;
@@ -1801,13 +1806,13 @@ function ce(i) {
   const e = i.toLowerCase().trim();
   return e ? gt.filter((o) => o.replace("ti ti-", "").includes(e)) : gt;
 }
-const fe = window.React, { useState: ue, useRef: de, useEffect: Kt, useCallback: pe } = fe;
+const fe = window.React, { useState: ue, useRef: de, useEffect: Yt, useCallback: pe } = fe;
 function ge({ selectedIcon: i, onSelect: e, onClose: o }) {
   const [n, l] = ue(""), c = de(null);
-  Kt(() => {
+  Yt(() => {
     var f;
     (f = c.current) == null || f.focus();
-  }, []), Kt(() => {
+  }, []), Yt(() => {
     const f = (b) => {
       b.key === "Escape" && o();
     };
@@ -1927,13 +1932,13 @@ function ve(i) {
     const R = k;
     if (R.dataset.pinProcessed || !R.querySelector("button.orca-switch, button.orca-switch-on")) continue;
     const L = R.querySelector(".title"), N = ((b = L == null ? void 0 : L.textContent) == null ? void 0 : b.trim()) || "";
-    let Y = "";
+    let K = "";
     for (const [D, h] of Object.entries(l.schema))
       if ((h == null ? void 0 : h.label) === N || h != null && h.label && N.includes(h.label)) {
-        Y = D;
+        K = D;
         break;
       }
-    if (!Y) continue;
+    if (!K) continue;
     R.dataset.pinProcessed = "true";
     const G = {
       section: n,
@@ -1941,7 +1946,7 @@ function ve(i) {
       controlType: "switch",
       isPlugin: !0,
       pluginName: n,
-      key: Y
+      key: K
     };
     Ht(G) && ii(R, G);
   }
@@ -2180,7 +2185,7 @@ function Ut() {
   e !== q && (q = e, console.log(`[PADD] 开关状态变化 → ${q}`), q ? ni() : ai()), o !== ot && (ot = o);
 }
 async function Ce(i) {
-  _ = i, Yi(orca.state.locale, { "zh-CN": Ki }), console.log(`${_} LCARS 工具箱加载中...`);
+  _ = i, Ki(orca.state.locale, { "zh-CN": Yi }), console.log(`${_} LCARS 工具箱加载中...`);
   try {
     te(_), Zi(() => ot), await ee(), await orca.plugins.setSettingsSchema(_, Pe);
     const e = orca.state.plugins[_];
