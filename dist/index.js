@@ -115,7 +115,9 @@ function Xi(i) {
 }
 const Qi = [
   { type: "section", value: "快捷键" },
-  { type: "settingName", value: "调试模式" }
+  { type: "settingName", value: "调试模式" },
+  { type: "settingName", value: "启用插件" }
+  // 插件的启用/禁用开关，钉选后点击无效
 ];
 function Ht(i, e = Qi) {
   if (i.controlType !== "switch")
