@@ -1,18 +1,24 @@
-let Jt = "en", Gt = {};
-function Ki(i, e) {
-  Jt = i, Gt = e;
+let _i = "en", Ci = {};
+function Me(t, e) {
+  _i = t, Ci = e;
 }
-function B(i, e, o) {
-  var l;
-  return ((l = Gt[o ?? Jt]) == null ? void 0 : l[i]) ?? i;
+function at(t, e, o) {
+  var a;
+  return ((a = Ci[o ?? _i]) == null ? void 0 : a[t]) ?? t;
 }
-const Yi = {
+const Ne = {
   "settings-pin.pin": "固定到侧边栏",
   "settings-pin.unpin": "取消固定",
   "settings-pin.search-icons": "搜索图标...",
   "settings-pin.no-icons-found": "未找到图标",
   "settings-pin.clear": "关闭"
-}, Vi = {
+}, Le = {
+  "settings-pin.pin": "Pin to sidebar",
+  "settings-pin.unpin": "Unpin",
+  "settings-pin.search-icons": "Search icons...",
+  "settings-pin.no-icons-found": "No icons found",
+  "settings-pin.clear": "Close"
+}, je = {
   语言与地区: {
     "24小时制": 9
     // HourSystem (boolean: true/false)
@@ -32,88 +38,88 @@ const Yi = {
     // S3EnableSync (number: 1/0)
   }
 };
-function Wi(i) {
-  var b;
-  const e = i.querySelector(".title");
+function ze(t) {
+  var h;
+  const e = t.querySelector(".title");
   if (!e) return null;
-  const o = ((b = e.textContent) == null ? void 0 : b.trim()) || "";
+  const o = ((h = e.textContent) == null ? void 0 : h.trim()) || "";
   if (!o) return null;
-  const n = i.querySelector(".option");
-  if (!n) return null;
-  const l = Bi(n);
-  if (!l) return null;
-  const c = Ui();
-  if (!c) return null;
-  const g = Ji();
-  let y, f = 0;
-  if (g)
-    y = Gi(), f = Hi(y, o);
+  const r = t.querySelector(".option");
+  if (!r) return null;
+  const a = qe(r);
+  if (!a) return null;
+  const s = Fe();
+  if (!s) return null;
+  const f = We();
+  let g, c = 0;
+  if (f)
+    g = Be(), c = Ve(g, o);
   else {
-    const k = Vi[c];
-    k && k[o] ? f = k[o] : (console.debug(`未知设置映射: ${c}.${o}`), f = -1);
+    const S = je[s];
+    S && S[o] ? c = S[o] : (console.debug(`未知设置映射: ${s}.${o}`), c = -1);
   }
   return {
-    section: c,
+    section: s,
     title: o,
-    controlType: l,
-    element: i,
-    isPlugin: g,
-    pluginName: y,
-    key: f
+    controlType: a,
+    element: t,
+    isPlugin: f,
+    pluginName: g,
+    key: c
   };
 }
-function Bi(i) {
-  if (i.querySelector("button.orca-switch, button.orca-switch-on"))
+function qe(t) {
+  if (t.querySelector("button.orca-switch, button.orca-switch-on"))
     return "switch";
-  if (i.querySelector("button.orca-button.plain.orca-select-button"))
+  if (t.querySelector("button.orca-button.plain.orca-select-button"))
     return "select";
-  if (i.querySelector("span.orca-input > input.orca-input-actualinput")) {
-    const e = i.querySelector("input");
+  if (t.querySelector("span.orca-input > input.orca-input-actualinput")) {
+    const e = t.querySelector("input");
     return e && e.type === "color" ? "color" : "input";
   }
-  return i.querySelector("div.orca-segmented") ? "segmented" : null;
+  return t.querySelector("div.orca-segmented") ? "segmented" : null;
 }
-function Ui() {
-  var n, l;
-  const i = document.querySelector(".orca-modal-overlay");
-  if (!i) return "";
-  const e = i.querySelector(".sections .item.selected");
+function Fe() {
+  var r, a;
+  const t = document.querySelector(".orca-modal-overlay");
+  if (!t) return "";
+  const e = t.querySelector(".sections .item.selected");
   if (e) {
-    const c = e.querySelector("span");
-    if (c) return ((n = c.textContent) == null ? void 0 : n.trim()) || "";
+    const s = e.querySelector("span");
+    if (s) return ((r = s.textContent) == null ? void 0 : r.trim()) || "";
   }
-  const o = i.querySelector("section .orca-memoizedviews-active h2");
-  return o && ((l = o.textContent) == null ? void 0 : l.trim()) || "";
+  const o = t.querySelector("section .orca-memoizedviews-active h2");
+  return o && ((a = o.textContent) == null ? void 0 : a.trim()) || "";
 }
-function Ji(i) {
+function We(t) {
   const e = document.querySelector(".orca-modal-overlay");
   if (!e) return !1;
   const o = e.querySelector(".sections .selected");
   return !!(o && o.classList.contains("plugin-item"));
 }
-function Gi(i) {
-  var n;
+function Be(t) {
+  var r;
   const e = document.querySelector(".orca-modal-overlay");
   if (!e) return "";
   const o = e.querySelector(".sections .plugin-item.selected span");
-  return o && ((n = o.textContent) == null ? void 0 : n.trim()) || "";
+  return o && ((r = o.textContent) == null ? void 0 : r.trim()) || "";
 }
-function Hi(i, e) {
-  var n;
-  const o = (n = orca.state.plugins) == null ? void 0 : n[i];
+function Ve(t, e) {
+  var r;
+  const o = (r = orca.state.plugins) == null ? void 0 : r[t];
   if (!(o != null && o.schema)) return "";
-  for (const [l, c] of Object.entries(o.schema))
-    if ((c == null ? void 0 : c.label) === e)
-      return l;
-  for (const [l, c] of Object.entries(o.schema))
-    if (c != null && c.label && e.includes(c.label))
-      return l;
-  return console.debug(`插件 ${i} 的设置 "${e}" 未找到对应 key`), "";
+  for (const [a, s] of Object.entries(o.schema))
+    if ((s == null ? void 0 : s.label) === e)
+      return a;
+  for (const [a, s] of Object.entries(o.schema))
+    if (s != null && s.label && e.includes(s.label))
+      return a;
+  return console.debug(`插件 ${t} 的设置 "${e}" 未找到对应 key`), "";
 }
-function Xi(i) {
-  return i.isPlugin && i.pluginName ? { type: "plugin", pluginName: i.pluginName, settingKey: String(i.key) } : { type: "app", appKey: Number(i.key) };
+function He(t) {
+  return t.isPlugin && t.pluginName ? { type: "plugin", pluginName: t.pluginName, settingKey: String(t.key) } : { type: "app", appKey: Number(t.key) };
 }
-const Qi = [
+const Ke = [
   // 快捷键设置面板（无有效开关）
   { type: "section", value: "快捷键" },
   { type: "section", value: "Keyboard shortcuts" },
@@ -124,82 +130,82 @@ const Qi = [
   { type: "settingName", value: "启用插件" },
   { type: "settingName", value: "Enable plugin" }
 ];
-function Ht(i, e = Qi) {
-  if (i.controlType !== "switch")
+function Di(t, e = Ke) {
+  if (t.controlType !== "switch")
     return !1;
   for (const o of e)
     switch (o.type) {
       case "controlType":
-        if (i.controlType === o.value) return !1;
+        if (t.controlType === o.value) return !1;
         break;
       case "settingName":
-        if (i.title === o.value) return !1;
+        if (t.title === o.value) return !1;
         break;
       case "section":
-        if (i.section === o.value) return !1;
+        if (t.section === o.value) return !1;
         break;
     }
   return !0;
 }
-let ht, Xt = () => !1;
-const j = /* @__PURE__ */ new Map();
-let I = null;
-function Zi(i) {
-  Xt = i;
+let zt, $i = () => !1;
+const T = /* @__PURE__ */ new Map();
+let W = null;
+function Ge(t) {
+  $i = t;
 }
-function te(i) {
-  ht = i;
+function Ye(t) {
+  zt = t;
 }
-function ie(i) {
-  I = i;
+function Ue(t) {
+  W = t;
 }
-async function ee() {
+async function Xe() {
   try {
-    const i = await orca.plugins.getData(ht, "pinned");
-    if (i && typeof i == "string") {
-      const e = JSON.parse(i);
-      j.clear();
+    const t = await orca.plugins.getData(zt, "pinned");
+    if (t && typeof t == "string") {
+      const e = JSON.parse(t);
+      T.clear();
       for (const o of e)
-        j.set(o.id, o);
-      Xt() && console.debug(`[PADD] 已加载 ${j.size} 个钉选设置`);
+        T.set(o.id, o);
+      $i() && console.debug(`[PADD] 已加载 ${T.size} 个钉选设置`);
     }
-  } catch (i) {
-    console.warn("[PADD] 加载钉选设置失败:", i);
+  } catch (t) {
+    console.warn("[PADD] 加载钉选设置失败:", t);
   }
 }
-async function Qt() {
+async function Ai() {
   try {
-    const i = Array.from(j.values());
-    await orca.plugins.setData(ht, "pinned", JSON.stringify(i));
-  } catch (i) {
-    console.error("[PADD] 保存钉选设置失败:", i);
+    const t = Array.from(T.values());
+    await orca.plugins.setData(zt, "pinned", JSON.stringify(t));
+  } catch (t) {
+    console.error("[PADD] 保存钉选设置失败:", t);
   }
 }
-async function re(i) {
-  j.set(i.id, i), await Qt(), I == null || I(i);
+async function Je(t) {
+  T.set(t.id, t), await Ai(), W == null || W(t);
 }
-async function oe(i) {
-  j.delete(i) && (await Qt(), I == null || I(void 0, i));
+async function Ze(t) {
+  T.delete(t) && (await Ai(), W == null || W(void 0, t));
 }
-function Zt() {
-  return Array.from(j.values());
+function Ti() {
+  return Array.from(T.values());
 }
-function pt(i) {
-  return j.get(i);
+function Mt(t) {
+  return T.get(t);
 }
-function ne(i) {
-  return j.has(i);
+function Qe(t) {
+  return T.has(t);
 }
-function ae(i, e, o, n) {
-  const l = o ? "plugin" : "app", c = o && n ? `.${n}` : "";
-  return `${l}${c}.${e}`;
+function to(t, e, o, r) {
+  const a = o ? "plugin" : "app", s = o && r ? `.${r}` : "";
+  return `${a}${s}.${e}`;
 }
-var ti = { exports: {} };
-const le = React;
-var W = {}, Kt;
-function se() {
-  if (Kt) return W;
-  Kt = 1;
+var Oi = { exports: {} };
+const io = React;
+var rt = {}, bi;
+function eo() {
+  if (bi) return rt;
+  bi = 1;
   /**
    * @license React
    * react-jsx-runtime.development.js
@@ -210,88 +216,88 @@ function se() {
    * LICENSE file in the root directory of this source tree.
    */
   return function() {
-    var i = le, e = Symbol.for("react.element"), o = Symbol.for("react.portal"), n = Symbol.for("react.fragment"), l = Symbol.for("react.strict_mode"), c = Symbol.for("react.profiler"), g = Symbol.for("react.provider"), y = Symbol.for("react.context"), f = Symbol.for("react.forward_ref"), b = Symbol.for("react.suspense"), k = Symbol.for("react.suspense_list"), R = Symbol.for("react.memo"), S = Symbol.for("react.lazy"), L = Symbol.for("react.offscreen"), N = Symbol.iterator, K = "@@iterator";
-    function G(t) {
-      if (t === null || typeof t != "object")
+    var t = io, e = Symbol.for("react.element"), o = Symbol.for("react.portal"), r = Symbol.for("react.fragment"), a = Symbol.for("react.strict_mode"), s = Symbol.for("react.profiler"), f = Symbol.for("react.provider"), g = Symbol.for("react.context"), c = Symbol.for("react.forward_ref"), h = Symbol.for("react.suspense"), S = Symbol.for("react.suspense_list"), C = Symbol.for("react.memo"), x = Symbol.for("react.lazy"), tt = Symbol.for("react.offscreen"), Y = Symbol.iterator, it = "@@iterator";
+    function dt(i) {
+      if (i === null || typeof i != "object")
         return null;
-      var r = N && t[N] || t[K];
-      return typeof r == "function" ? r : null;
+      var n = Y && i[Y] || i[it];
+      return typeof n == "function" ? n : null;
     }
-    var D = i.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
-    function h(t) {
+    var O = t.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
+    function v(i) {
       {
-        for (var r = arguments.length, a = new Array(r > 1 ? r - 1 : 0), s = 1; s < r; s++)
-          a[s - 1] = arguments[s];
-        li("error", t, a);
+        for (var n = arguments.length, l = new Array(n > 1 ? n - 1 : 0), u = 1; u < n; u++)
+          l[u - 1] = arguments[u];
+        te("error", i, l);
       }
     }
-    function li(t, r, a) {
+    function te(i, n, l) {
       {
-        var s = D.ReactDebugCurrentFrame, p = s.getStackAddendum();
-        p !== "" && (r += "%s", a = a.concat([p]));
-        var m = a.map(function(d) {
-          return String(d);
+        var u = O.ReactDebugCurrentFrame, m = u.getStackAddendum();
+        m !== "" && (n += "%s", l = l.concat([m]));
+        var b = l.map(function(p) {
+          return String(p);
         });
-        m.unshift("Warning: " + r), Function.prototype.apply.call(console[t], console, m);
+        b.unshift("Warning: " + n), Function.prototype.apply.call(console[i], console, b);
       }
     }
-    var si = !1, ci = !1, fi = !1, ui = !1, di = !1, bt;
-    bt = Symbol.for("react.module.reference");
-    function pi(t) {
-      return !!(typeof t == "string" || typeof t == "function" || t === n || t === c || di || t === l || t === b || t === k || ui || t === L || si || ci || fi || typeof t == "object" && t !== null && (t.$$typeof === S || t.$$typeof === R || t.$$typeof === g || t.$$typeof === y || t.$$typeof === f || // This needs to include all possible module reference object
+    var ie = !1, ee = !1, oe = !1, re = !1, ne = !1, Kt;
+    Kt = Symbol.for("react.module.reference");
+    function ae(i) {
+      return !!(typeof i == "string" || typeof i == "function" || i === r || i === s || ne || i === a || i === h || i === S || re || i === tt || ie || ee || oe || typeof i == "object" && i !== null && (i.$$typeof === x || i.$$typeof === C || i.$$typeof === f || i.$$typeof === g || i.$$typeof === c || // This needs to include all possible module reference object
       // types supported by any Flight configuration anywhere since
       // we don't know which Flight build this will end up being used
       // with.
-      t.$$typeof === bt || t.getModuleId !== void 0));
+      i.$$typeof === Kt || i.getModuleId !== void 0));
     }
-    function gi(t, r, a) {
-      var s = t.displayName;
-      if (s)
-        return s;
-      var p = r.displayName || r.name || "";
-      return p !== "" ? a + "(" + p + ")" : a;
+    function le(i, n, l) {
+      var u = i.displayName;
+      if (u)
+        return u;
+      var m = n.displayName || n.name || "";
+      return m !== "" ? l + "(" + m + ")" : l;
     }
-    function vt(t) {
-      return t.displayName || "Context";
+    function Gt(i) {
+      return i.displayName || "Context";
     }
-    function O(t) {
-      if (t == null)
+    function I(i) {
+      if (i == null)
         return null;
-      if (typeof t.tag == "number" && h("Received an unexpected object in getComponentNameFromType(). This is likely a bug in React. Please file an issue."), typeof t == "function")
-        return t.displayName || t.name || null;
-      if (typeof t == "string")
-        return t;
-      switch (t) {
-        case n:
+      if (typeof i.tag == "number" && v("Received an unexpected object in getComponentNameFromType(). This is likely a bug in React. Please file an issue."), typeof i == "function")
+        return i.displayName || i.name || null;
+      if (typeof i == "string")
+        return i;
+      switch (i) {
+        case r:
           return "Fragment";
         case o:
           return "Portal";
-        case c:
+        case s:
           return "Profiler";
-        case l:
+        case a:
           return "StrictMode";
-        case b:
+        case h:
           return "Suspense";
-        case k:
+        case S:
           return "SuspenseList";
       }
-      if (typeof t == "object")
-        switch (t.$$typeof) {
-          case y:
-            var r = t;
-            return vt(r) + ".Consumer";
+      if (typeof i == "object")
+        switch (i.$$typeof) {
           case g:
-            var a = t;
-            return vt(a._context) + ".Provider";
+            var n = i;
+            return Gt(n) + ".Consumer";
           case f:
-            return gi(t, t.render, "ForwardRef");
-          case R:
-            var s = t.displayName || null;
-            return s !== null ? s : O(t.type) || "Memo";
-          case S: {
-            var p = t, m = p._payload, d = p._init;
+            var l = i;
+            return Gt(l._context) + ".Provider";
+          case c:
+            return le(i, i.render, "ForwardRef");
+          case C:
+            var u = i.displayName || null;
+            return u !== null ? u : I(i.type) || "Memo";
+          case x: {
+            var m = i, b = m._payload, p = m._init;
             try {
-              return O(d(m));
+              return I(p(b));
             } catch {
               return null;
             }
@@ -299,507 +305,507 @@ function se() {
         }
       return null;
     }
-    var A = Object.assign, Y = 0, yt, wt, kt, St, xt, Et, Pt;
-    function Rt() {
+    var j = Object.assign, et = 0, Yt, Ut, Xt, Jt, Zt, Qt, ti;
+    function ii() {
     }
-    Rt.__reactDisabledLog = !0;
-    function mi() {
+    ii.__reactDisabledLog = !0;
+    function se() {
       {
-        if (Y === 0) {
-          yt = console.log, wt = console.info, kt = console.warn, St = console.error, xt = console.group, Et = console.groupCollapsed, Pt = console.groupEnd;
-          var t = {
+        if (et === 0) {
+          Yt = console.log, Ut = console.info, Xt = console.warn, Jt = console.error, Zt = console.group, Qt = console.groupCollapsed, ti = console.groupEnd;
+          var i = {
             configurable: !0,
             enumerable: !0,
-            value: Rt,
+            value: ii,
             writable: !0
           };
           Object.defineProperties(console, {
-            info: t,
-            log: t,
-            warn: t,
-            error: t,
-            group: t,
-            groupCollapsed: t,
-            groupEnd: t
+            info: i,
+            log: i,
+            warn: i,
+            error: i,
+            group: i,
+            groupCollapsed: i,
+            groupEnd: i
           });
         }
-        Y++;
+        et++;
       }
     }
-    function hi() {
+    function ce() {
       {
-        if (Y--, Y === 0) {
-          var t = {
+        if (et--, et === 0) {
+          var i = {
             configurable: !0,
             enumerable: !0,
             writable: !0
           };
           Object.defineProperties(console, {
-            log: A({}, t, {
-              value: yt
+            log: j({}, i, {
+              value: Yt
             }),
-            info: A({}, t, {
-              value: wt
+            info: j({}, i, {
+              value: Ut
             }),
-            warn: A({}, t, {
-              value: kt
+            warn: j({}, i, {
+              value: Xt
             }),
-            error: A({}, t, {
-              value: St
+            error: j({}, i, {
+              value: Jt
             }),
-            group: A({}, t, {
-              value: xt
+            group: j({}, i, {
+              value: Zt
             }),
-            groupCollapsed: A({}, t, {
-              value: Et
+            groupCollapsed: j({}, i, {
+              value: Qt
             }),
-            groupEnd: A({}, t, {
-              value: Pt
+            groupEnd: j({}, i, {
+              value: ti
             })
           });
         }
-        Y < 0 && h("disabledDepth fell below zero. This is a bug in React. Please file an issue.");
+        et < 0 && v("disabledDepth fell below zero. This is a bug in React. Please file an issue.");
       }
     }
-    var nt = D.ReactCurrentDispatcher, at;
-    function H(t, r, a) {
+    var _t = O.ReactCurrentDispatcher, Ct;
+    function pt(i, n, l) {
       {
-        if (at === void 0)
+        if (Ct === void 0)
           try {
             throw Error();
-          } catch (p) {
-            var s = p.stack.trim().match(/\n( *(at )?)/);
-            at = s && s[1] || "";
+          } catch (m) {
+            var u = m.stack.trim().match(/\n( *(at )?)/);
+            Ct = u && u[1] || "";
           }
         return `
-` + at + t;
+` + Ct + i;
       }
     }
-    var lt = !1, X;
+    var Dt = !1, gt;
     {
-      var bi = typeof WeakMap == "function" ? WeakMap : Map;
-      X = new bi();
+      var ue = typeof WeakMap == "function" ? WeakMap : Map;
+      gt = new ue();
     }
-    function Ct(t, r) {
-      if (!t || lt)
+    function ei(i, n) {
+      if (!i || Dt)
         return "";
       {
-        var a = X.get(t);
-        if (a !== void 0)
-          return a;
+        var l = gt.get(i);
+        if (l !== void 0)
+          return l;
       }
-      var s;
-      lt = !0;
-      var p = Error.prepareStackTrace;
+      var u;
+      Dt = !0;
+      var m = Error.prepareStackTrace;
       Error.prepareStackTrace = void 0;
-      var m;
-      m = nt.current, nt.current = null, mi();
+      var b;
+      b = _t.current, _t.current = null, se();
       try {
-        if (r) {
-          var d = function() {
+        if (n) {
+          var p = function() {
             throw Error();
           };
-          if (Object.defineProperty(d.prototype, "props", {
+          if (Object.defineProperty(p.prototype, "props", {
             set: function() {
               throw Error();
             }
           }), typeof Reflect == "object" && Reflect.construct) {
             try {
-              Reflect.construct(d, []);
-            } catch (E) {
-              s = E;
+              Reflect.construct(p, []);
+            } catch (R) {
+              u = R;
             }
-            Reflect.construct(t, [], d);
+            Reflect.construct(i, [], p);
           } else {
             try {
-              d.call();
-            } catch (E) {
-              s = E;
+              p.call();
+            } catch (R) {
+              u = R;
             }
-            t.call(d.prototype);
+            i.call(p.prototype);
           }
         } else {
           try {
             throw Error();
-          } catch (E) {
-            s = E;
+          } catch (R) {
+            u = R;
           }
-          t();
+          i();
         }
-      } catch (E) {
-        if (E && s && typeof E.stack == "string") {
-          for (var u = E.stack.split(`
-`), x = s.stack.split(`
-`), v = u.length - 1, w = x.length - 1; v >= 1 && w >= 0 && u[v] !== x[w]; )
+      } catch (R) {
+        if (R && u && typeof R.stack == "string") {
+          for (var d = R.stack.split(`
+`), P = u.stack.split(`
+`), y = d.length - 1, w = P.length - 1; y >= 1 && w >= 0 && d[y] !== P[w]; )
             w--;
-          for (; v >= 1 && w >= 0; v--, w--)
-            if (u[v] !== x[w]) {
-              if (v !== 1 || w !== 1)
+          for (; y >= 1 && w >= 0; y--, w--)
+            if (d[y] !== P[w]) {
+              if (y !== 1 || w !== 1)
                 do
-                  if (v--, w--, w < 0 || u[v] !== x[w]) {
-                    var C = `
-` + u[v].replace(" at new ", " at ");
-                    return t.displayName && C.includes("<anonymous>") && (C = C.replace("<anonymous>", t.displayName)), typeof t == "function" && X.set(t, C), C;
+                  if (y--, w--, w < 0 || d[y] !== P[w]) {
+                    var D = `
+` + d[y].replace(" at new ", " at ");
+                    return i.displayName && D.includes("<anonymous>") && (D = D.replace("<anonymous>", i.displayName)), typeof i == "function" && gt.set(i, D), D;
                   }
-                while (v >= 1 && w >= 0);
+                while (y >= 1 && w >= 0);
               break;
             }
         }
       } finally {
-        lt = !1, nt.current = m, hi(), Error.prepareStackTrace = p;
+        Dt = !1, _t.current = b, ce(), Error.prepareStackTrace = m;
       }
-      var M = t ? t.displayName || t.name : "", $ = M ? H(M) : "";
-      return typeof t == "function" && X.set(t, $), $;
+      var X = i ? i.displayName || i.name : "", z = X ? pt(X) : "";
+      return typeof i == "function" && gt.set(i, z), z;
     }
-    function vi(t, r, a) {
-      return Ct(t, !1);
+    function fe(i, n, l) {
+      return ei(i, !1);
     }
-    function yi(t) {
-      var r = t.prototype;
-      return !!(r && r.isReactComponent);
+    function de(i) {
+      var n = i.prototype;
+      return !!(n && n.isReactComponent);
     }
-    function Q(t, r, a) {
-      if (t == null)
+    function mt(i, n, l) {
+      if (i == null)
         return "";
-      if (typeof t == "function")
-        return Ct(t, yi(t));
-      if (typeof t == "string")
-        return H(t);
-      switch (t) {
-        case b:
-          return H("Suspense");
-        case k:
-          return H("SuspenseList");
+      if (typeof i == "function")
+        return ei(i, de(i));
+      if (typeof i == "string")
+        return pt(i);
+      switch (i) {
+        case h:
+          return pt("Suspense");
+        case S:
+          return pt("SuspenseList");
       }
-      if (typeof t == "object")
-        switch (t.$$typeof) {
-          case f:
-            return vi(t.render);
-          case R:
-            return Q(t.type, r, a);
-          case S: {
-            var s = t, p = s._payload, m = s._init;
+      if (typeof i == "object")
+        switch (i.$$typeof) {
+          case c:
+            return fe(i.render);
+          case C:
+            return mt(i.type, n, l);
+          case x: {
+            var u = i, m = u._payload, b = u._init;
             try {
-              return Q(m(p), r, a);
+              return mt(b(m), n, l);
             } catch {
             }
           }
         }
       return "";
     }
-    var V = Object.prototype.hasOwnProperty, _t = {}, Tt = D.ReactDebugCurrentFrame;
-    function Z(t) {
-      if (t) {
-        var r = t._owner, a = Q(t.type, t._source, r ? r.type : null);
-        Tt.setExtraStackFrame(a);
+    var ot = Object.prototype.hasOwnProperty, oi = {}, ri = O.ReactDebugCurrentFrame;
+    function ht(i) {
+      if (i) {
+        var n = i._owner, l = mt(i.type, i._source, n ? n.type : null);
+        ri.setExtraStackFrame(l);
       } else
-        Tt.setExtraStackFrame(null);
+        ri.setExtraStackFrame(null);
     }
-    function wi(t, r, a, s, p) {
+    function pe(i, n, l, u, m) {
       {
-        var m = Function.call.bind(V);
-        for (var d in t)
-          if (m(t, d)) {
-            var u = void 0;
+        var b = Function.call.bind(ot);
+        for (var p in i)
+          if (b(i, p)) {
+            var d = void 0;
             try {
-              if (typeof t[d] != "function") {
-                var x = Error((s || "React class") + ": " + a + " type `" + d + "` is invalid; it must be a function, usually from the `prop-types` package, but received `" + typeof t[d] + "`.This often happens because of typos such as `PropTypes.function` instead of `PropTypes.func`.");
-                throw x.name = "Invariant Violation", x;
+              if (typeof i[p] != "function") {
+                var P = Error((u || "React class") + ": " + l + " type `" + p + "` is invalid; it must be a function, usually from the `prop-types` package, but received `" + typeof i[p] + "`.This often happens because of typos such as `PropTypes.function` instead of `PropTypes.func`.");
+                throw P.name = "Invariant Violation", P;
               }
-              u = t[d](r, d, s, a, null, "SECRET_DO_NOT_PASS_THIS_OR_YOU_WILL_BE_FIRED");
-            } catch (v) {
-              u = v;
+              d = i[p](n, p, u, l, null, "SECRET_DO_NOT_PASS_THIS_OR_YOU_WILL_BE_FIRED");
+            } catch (y) {
+              d = y;
             }
-            u && !(u instanceof Error) && (Z(p), h("%s: type specification of %s `%s` is invalid; the type checker function must return `null` or an `Error` but returned a %s. You may have forgotten to pass an argument to the type checker creator (arrayOf, instanceOf, objectOf, oneOf, oneOfType, and shape all require an argument).", s || "React class", a, d, typeof u), Z(null)), u instanceof Error && !(u.message in _t) && (_t[u.message] = !0, Z(p), h("Failed %s type: %s", a, u.message), Z(null));
+            d && !(d instanceof Error) && (ht(m), v("%s: type specification of %s `%s` is invalid; the type checker function must return `null` or an `Error` but returned a %s. You may have forgotten to pass an argument to the type checker creator (arrayOf, instanceOf, objectOf, oneOf, oneOfType, and shape all require an argument).", u || "React class", l, p, typeof d), ht(null)), d instanceof Error && !(d.message in oi) && (oi[d.message] = !0, ht(m), v("Failed %s type: %s", l, d.message), ht(null));
           }
       }
     }
-    var ki = Array.isArray;
-    function st(t) {
-      return ki(t);
+    var ge = Array.isArray;
+    function $t(i) {
+      return ge(i);
     }
-    function Si(t) {
+    function me(i) {
       {
-        var r = typeof Symbol == "function" && Symbol.toStringTag, a = r && t[Symbol.toStringTag] || t.constructor.name || "Object";
-        return a;
+        var n = typeof Symbol == "function" && Symbol.toStringTag, l = n && i[Symbol.toStringTag] || i.constructor.name || "Object";
+        return l;
       }
     }
-    function xi(t) {
+    function he(i) {
       try {
-        return jt(t), !1;
+        return ni(i), !1;
       } catch {
         return !0;
       }
     }
-    function jt(t) {
-      return "" + t;
+    function ni(i) {
+      return "" + i;
     }
-    function Dt(t) {
-      if (xi(t))
-        return h("The provided key is an unsupported type %s. This value must be coerced to a string before before using it here.", Si(t)), jt(t);
+    function ai(i) {
+      if (he(i))
+        return v("The provided key is an unsupported type %s. This value must be coerced to a string before before using it here.", me(i)), ni(i);
     }
-    var Ot = D.ReactCurrentOwner, Ei = {
+    var li = O.ReactCurrentOwner, be = {
       key: !0,
       ref: !0,
       __self: !0,
       __source: !0
-    }, zt, At;
-    function Pi(t) {
-      if (V.call(t, "ref")) {
-        var r = Object.getOwnPropertyDescriptor(t, "ref").get;
-        if (r && r.isReactWarning)
+    }, si, ci;
+    function ve(i) {
+      if (ot.call(i, "ref")) {
+        var n = Object.getOwnPropertyDescriptor(i, "ref").get;
+        if (n && n.isReactWarning)
           return !1;
       }
-      return t.ref !== void 0;
+      return i.ref !== void 0;
     }
-    function Ri(t) {
-      if (V.call(t, "key")) {
-        var r = Object.getOwnPropertyDescriptor(t, "key").get;
-        if (r && r.isReactWarning)
+    function ye(i) {
+      if (ot.call(i, "key")) {
+        var n = Object.getOwnPropertyDescriptor(i, "key").get;
+        if (n && n.isReactWarning)
           return !1;
       }
-      return t.key !== void 0;
+      return i.key !== void 0;
     }
-    function Ci(t, r) {
-      typeof t.ref == "string" && Ot.current;
+    function we(i, n) {
+      typeof i.ref == "string" && li.current;
     }
-    function _i(t, r) {
+    function ke(i, n) {
       {
-        var a = function() {
-          zt || (zt = !0, h("%s: `key` is not a prop. Trying to access it will result in `undefined` being returned. If you need to access the same value within the child component, you should pass it as a different prop. (https://reactjs.org/link/special-props)", r));
+        var l = function() {
+          si || (si = !0, v("%s: `key` is not a prop. Trying to access it will result in `undefined` being returned. If you need to access the same value within the child component, you should pass it as a different prop. (https://reactjs.org/link/special-props)", n));
         };
-        a.isReactWarning = !0, Object.defineProperty(t, "key", {
-          get: a,
+        l.isReactWarning = !0, Object.defineProperty(i, "key", {
+          get: l,
           configurable: !0
         });
       }
     }
-    function Ti(t, r) {
+    function Se(i, n) {
       {
-        var a = function() {
-          At || (At = !0, h("%s: `ref` is not a prop. Trying to access it will result in `undefined` being returned. If you need to access the same value within the child component, you should pass it as a different prop. (https://reactjs.org/link/special-props)", r));
+        var l = function() {
+          ci || (ci = !0, v("%s: `ref` is not a prop. Trying to access it will result in `undefined` being returned. If you need to access the same value within the child component, you should pass it as a different prop. (https://reactjs.org/link/special-props)", n));
         };
-        a.isReactWarning = !0, Object.defineProperty(t, "ref", {
-          get: a,
+        l.isReactWarning = !0, Object.defineProperty(i, "ref", {
+          get: l,
           configurable: !0
         });
       }
     }
-    var ji = function(t, r, a, s, p, m, d) {
-      var u = {
+    var Ee = function(i, n, l, u, m, b, p) {
+      var d = {
         // This tag allows us to uniquely identify this as a React Element
         $$typeof: e,
         // Built-in properties that belong on the element
-        type: t,
-        key: r,
-        ref: a,
-        props: d,
+        type: i,
+        key: n,
+        ref: l,
+        props: p,
         // Record the component responsible for creating this element.
-        _owner: m
+        _owner: b
       };
-      return u._store = {}, Object.defineProperty(u._store, "validated", {
+      return d._store = {}, Object.defineProperty(d._store, "validated", {
         configurable: !1,
         enumerable: !1,
         writable: !0,
         value: !1
-      }), Object.defineProperty(u, "_self", {
+      }), Object.defineProperty(d, "_self", {
         configurable: !1,
         enumerable: !1,
         writable: !1,
-        value: s
-      }), Object.defineProperty(u, "_source", {
+        value: u
+      }), Object.defineProperty(d, "_source", {
         configurable: !1,
         enumerable: !1,
         writable: !1,
-        value: p
-      }), Object.freeze && (Object.freeze(u.props), Object.freeze(u)), u;
+        value: m
+      }), Object.freeze && (Object.freeze(d.props), Object.freeze(d)), d;
     };
-    function Di(t, r, a, s, p) {
+    function xe(i, n, l, u, m) {
       {
-        var m, d = {}, u = null, x = null;
-        a !== void 0 && (Dt(a), u = "" + a), Ri(r) && (Dt(r.key), u = "" + r.key), Pi(r) && (x = r.ref, Ci(r, p));
-        for (m in r)
-          V.call(r, m) && !Ei.hasOwnProperty(m) && (d[m] = r[m]);
-        if (t && t.defaultProps) {
-          var v = t.defaultProps;
-          for (m in v)
-            d[m] === void 0 && (d[m] = v[m]);
+        var b, p = {}, d = null, P = null;
+        l !== void 0 && (ai(l), d = "" + l), ye(n) && (ai(n.key), d = "" + n.key), ve(n) && (P = n.ref, we(n, m));
+        for (b in n)
+          ot.call(n, b) && !be.hasOwnProperty(b) && (p[b] = n[b]);
+        if (i && i.defaultProps) {
+          var y = i.defaultProps;
+          for (b in y)
+            p[b] === void 0 && (p[b] = y[b]);
         }
-        if (u || x) {
-          var w = typeof t == "function" ? t.displayName || t.name || "Unknown" : t;
-          u && _i(d, w), x && Ti(d, w);
+        if (d || P) {
+          var w = typeof i == "function" ? i.displayName || i.name || "Unknown" : i;
+          d && ke(p, w), P && Se(p, w);
         }
-        return ji(t, u, x, p, s, Ot.current, d);
+        return Ee(i, d, P, m, u, li.current, p);
       }
     }
-    var ct = D.ReactCurrentOwner, $t = D.ReactDebugCurrentFrame;
-    function F(t) {
-      if (t) {
-        var r = t._owner, a = Q(t.type, t._source, r ? r.type : null);
-        $t.setExtraStackFrame(a);
+    var At = O.ReactCurrentOwner, ui = O.ReactDebugCurrentFrame;
+    function U(i) {
+      if (i) {
+        var n = i._owner, l = mt(i.type, i._source, n ? n.type : null);
+        ui.setExtraStackFrame(l);
       } else
-        $t.setExtraStackFrame(null);
+        ui.setExtraStackFrame(null);
     }
-    var ft;
-    ft = !1;
-    function ut(t) {
-      return typeof t == "object" && t !== null && t.$$typeof === e;
+    var Tt;
+    Tt = !1;
+    function Ot(i) {
+      return typeof i == "object" && i !== null && i.$$typeof === e;
     }
-    function qt() {
+    function fi() {
       {
-        if (ct.current) {
-          var t = O(ct.current.type);
-          if (t)
+        if (At.current) {
+          var i = I(At.current.type);
+          if (i)
             return `
 
-Check the render method of \`` + t + "`.";
+Check the render method of \`` + i + "`.";
         }
         return "";
       }
     }
-    function Oi(t) {
+    function Pe(i) {
       return "";
     }
-    var It = {};
-    function zi(t) {
+    var di = {};
+    function Re(i) {
       {
-        var r = qt();
-        if (!r) {
-          var a = typeof t == "string" ? t : t.displayName || t.name;
-          a && (r = `
+        var n = fi();
+        if (!n) {
+          var l = typeof i == "string" ? i : i.displayName || i.name;
+          l && (n = `
 
-Check the top-level render call using <` + a + ">.");
+Check the top-level render call using <` + l + ">.");
         }
-        return r;
+        return n;
       }
     }
-    function Nt(t, r) {
+    function pi(i, n) {
       {
-        if (!t._store || t._store.validated || t.key != null)
+        if (!i._store || i._store.validated || i.key != null)
           return;
-        t._store.validated = !0;
-        var a = zi(r);
-        if (It[a])
+        i._store.validated = !0;
+        var l = Re(n);
+        if (di[l])
           return;
-        It[a] = !0;
-        var s = "";
-        t && t._owner && t._owner !== ct.current && (s = " It was passed a child from " + O(t._owner.type) + "."), F(t), h('Each child in a list should have a unique "key" prop.%s%s See https://reactjs.org/link/warning-keys for more information.', a, s), F(null);
+        di[l] = !0;
+        var u = "";
+        i && i._owner && i._owner !== At.current && (u = " It was passed a child from " + I(i._owner.type) + "."), U(i), v('Each child in a list should have a unique "key" prop.%s%s See https://reactjs.org/link/warning-keys for more information.', l, u), U(null);
       }
     }
-    function Ft(t, r) {
+    function gi(i, n) {
       {
-        if (typeof t != "object")
+        if (typeof i != "object")
           return;
-        if (st(t))
-          for (var a = 0; a < t.length; a++) {
-            var s = t[a];
-            ut(s) && Nt(s, r);
+        if ($t(i))
+          for (var l = 0; l < i.length; l++) {
+            var u = i[l];
+            Ot(u) && pi(u, n);
           }
-        else if (ut(t))
-          t._store && (t._store.validated = !0);
-        else if (t) {
-          var p = G(t);
-          if (typeof p == "function" && p !== t.entries)
-            for (var m = p.call(t), d; !(d = m.next()).done; )
-              ut(d.value) && Nt(d.value, r);
+        else if (Ot(i))
+          i._store && (i._store.validated = !0);
+        else if (i) {
+          var m = dt(i);
+          if (typeof m == "function" && m !== i.entries)
+            for (var b = m.call(i), p; !(p = b.next()).done; )
+              Ot(p.value) && pi(p.value, n);
         }
       }
     }
-    function Ai(t) {
+    function _e(i) {
       {
-        var r = t.type;
-        if (r == null || typeof r == "string")
+        var n = i.type;
+        if (n == null || typeof n == "string")
           return;
-        var a;
-        if (typeof r == "function")
-          a = r.propTypes;
-        else if (typeof r == "object" && (r.$$typeof === f || // Note: Memo only checks outer props here.
+        var l;
+        if (typeof n == "function")
+          l = n.propTypes;
+        else if (typeof n == "object" && (n.$$typeof === c || // Note: Memo only checks outer props here.
         // Inner props are checked in the reconciler.
-        r.$$typeof === R))
-          a = r.propTypes;
+        n.$$typeof === C))
+          l = n.propTypes;
         else
           return;
-        if (a) {
-          var s = O(r);
-          wi(a, t.props, "prop", s, t);
-        } else if (r.PropTypes !== void 0 && !ft) {
-          ft = !0;
-          var p = O(r);
-          h("Component %s declared `PropTypes` instead of `propTypes`. Did you misspell the property assignment?", p || "Unknown");
+        if (l) {
+          var u = I(n);
+          pe(l, i.props, "prop", u, i);
+        } else if (n.PropTypes !== void 0 && !Tt) {
+          Tt = !0;
+          var m = I(n);
+          v("Component %s declared `PropTypes` instead of `propTypes`. Did you misspell the property assignment?", m || "Unknown");
         }
-        typeof r.getDefaultProps == "function" && !r.getDefaultProps.isReactClassApproved && h("getDefaultProps is only used on classic React.createClass definitions. Use a static property named `defaultProps` instead.");
+        typeof n.getDefaultProps == "function" && !n.getDefaultProps.isReactClassApproved && v("getDefaultProps is only used on classic React.createClass definitions. Use a static property named `defaultProps` instead.");
       }
     }
-    function $i(t) {
+    function Ce(i) {
       {
-        for (var r = Object.keys(t.props), a = 0; a < r.length; a++) {
-          var s = r[a];
-          if (s !== "children" && s !== "key") {
-            F(t), h("Invalid prop `%s` supplied to `React.Fragment`. React.Fragment can only have `key` and `children` props.", s), F(null);
+        for (var n = Object.keys(i.props), l = 0; l < n.length; l++) {
+          var u = n[l];
+          if (u !== "children" && u !== "key") {
+            U(i), v("Invalid prop `%s` supplied to `React.Fragment`. React.Fragment can only have `key` and `children` props.", u), U(null);
             break;
           }
         }
-        t.ref !== null && (F(t), h("Invalid attribute `ref` supplied to `React.Fragment`."), F(null));
+        i.ref !== null && (U(i), v("Invalid attribute `ref` supplied to `React.Fragment`."), U(null));
       }
     }
-    var Mt = {};
-    function Lt(t, r, a, s, p, m) {
+    var mi = {};
+    function hi(i, n, l, u, m, b) {
       {
-        var d = pi(t);
-        if (!d) {
-          var u = "";
-          (t === void 0 || typeof t == "object" && t !== null && Object.keys(t).length === 0) && (u += " You likely forgot to export your component from the file it's defined in, or you might have mixed up default and named imports.");
-          var x = Oi();
-          x ? u += x : u += qt();
-          var v;
-          t === null ? v = "null" : st(t) ? v = "array" : t !== void 0 && t.$$typeof === e ? (v = "<" + (O(t.type) || "Unknown") + " />", u = " Did you accidentally export a JSX literal instead of a component?") : v = typeof t, h("React.jsx: type is invalid -- expected a string (for built-in components) or a class/function (for composite components) but got: %s.%s", v, u);
+        var p = ae(i);
+        if (!p) {
+          var d = "";
+          (i === void 0 || typeof i == "object" && i !== null && Object.keys(i).length === 0) && (d += " You likely forgot to export your component from the file it's defined in, or you might have mixed up default and named imports.");
+          var P = Pe();
+          P ? d += P : d += fi();
+          var y;
+          i === null ? y = "null" : $t(i) ? y = "array" : i !== void 0 && i.$$typeof === e ? (y = "<" + (I(i.type) || "Unknown") + " />", d = " Did you accidentally export a JSX literal instead of a component?") : y = typeof i, v("React.jsx: type is invalid -- expected a string (for built-in components) or a class/function (for composite components) but got: %s.%s", y, d);
         }
-        var w = Di(t, r, a, p, m);
+        var w = xe(i, n, l, m, b);
         if (w == null)
           return w;
-        if (d) {
-          var C = r.children;
-          if (C !== void 0)
-            if (s)
-              if (st(C)) {
-                for (var M = 0; M < C.length; M++)
-                  Ft(C[M], t);
-                Object.freeze && Object.freeze(C);
+        if (p) {
+          var D = n.children;
+          if (D !== void 0)
+            if (u)
+              if ($t(D)) {
+                for (var X = 0; X < D.length; X++)
+                  gi(D[X], i);
+                Object.freeze && Object.freeze(D);
               } else
-                h("React.jsx: Static children should always be an array. You are likely explicitly calling React.jsxs or React.jsxDEV. Use the Babel transform instead.");
+                v("React.jsx: Static children should always be an array. You are likely explicitly calling React.jsxs or React.jsxDEV. Use the Babel transform instead.");
             else
-              Ft(C, t);
+              gi(D, i);
         }
-        if (V.call(r, "key")) {
-          var $ = O(t), E = Object.keys(r).filter(function(Li) {
-            return Li !== "key";
-          }), dt = E.length > 0 ? "{key: someKey, " + E.join(": ..., ") + ": ...}" : "{key: someKey}";
-          if (!Mt[$ + dt]) {
-            var Mi = E.length > 0 ? "{" + E.join(": ..., ") + ": ...}" : "{}";
-            h(`A props object containing a "key" prop is being spread into JSX:
+        if (ot.call(n, "key")) {
+          var z = I(i), R = Object.keys(n).filter(function(Ie) {
+            return Ie !== "key";
+          }), It = R.length > 0 ? "{key: someKey, " + R.join(": ..., ") + ": ...}" : "{key: someKey}";
+          if (!mi[z + It]) {
+            var Oe = R.length > 0 ? "{" + R.join(": ..., ") + ": ...}" : "{}";
+            v(`A props object containing a "key" prop is being spread into JSX:
   let props = %s;
   <%s {...props} />
 React keys must be passed directly to JSX without using spread:
   let props = %s;
-  <%s key={someKey} {...props} />`, dt, $, Mi, $), Mt[$ + dt] = !0;
+  <%s key={someKey} {...props} />`, It, z, Oe, z), mi[z + It] = !0;
           }
         }
-        return t === n ? $i(w) : Ai(w), w;
+        return i === r ? Ce(w) : _e(w), w;
       }
     }
-    function qi(t, r, a) {
-      return Lt(t, r, a, !0);
+    function De(i, n, l) {
+      return hi(i, n, l, !0);
     }
-    function Ii(t, r, a) {
-      return Lt(t, r, a, !1);
+    function $e(i, n, l) {
+      return hi(i, n, l, !1);
     }
-    var Ni = Ii, Fi = qi;
-    W.Fragment = n, W.jsx = Ni, W.jsxs = Fi;
-  }(), W;
+    var Ae = $e, Te = De;
+    rt.Fragment = r, rt.jsx = Ae, rt.jsxs = Te;
+  }(), rt;
 }
-ti.exports = se();
-var P = ti.exports;
-const gt = [
+Oi.exports = eo();
+var _ = Oi.exports;
+const bt = [
   "ti ti-plus",
   "ti ti-minus",
   "ti ti-x",
@@ -1802,69 +1808,71 @@ const gt = [
   "ti ti-zodiac-virgo",
   "ti ti-zip"
 ];
-function ce(i) {
-  const e = i.toLowerCase().trim();
-  return e ? gt.filter((o) => o.replace("ti ti-", "").includes(e)) : gt;
+function oo(t) {
+  const e = t.toLowerCase().trim();
+  if (!e) return bt;
+  const o = e.length > 50 ? e.slice(0, 50) : e;
+  return o.length < 2 ? bt : bt.filter((r) => r.replace("ti ti-", "").includes(o));
 }
-const fe = window.React, { useState: ue, useRef: de, useEffect: Yt, useCallback: pe } = fe;
-function ge({ selectedIcon: i, onSelect: e, onClose: o }) {
-  const [n, l] = ue(""), c = de(null);
-  Yt(() => {
-    var f;
-    (f = c.current) == null || f.focus();
-  }, []), Yt(() => {
-    const f = (b) => {
-      b.key === "Escape" && o();
+const ro = window.React, { useState: no, useRef: ao, useEffect: vi, useCallback: lo } = ro;
+function so({ selectedIcon: t, onSelect: e, onClose: o }) {
+  const [r, a] = no(""), s = ao(null);
+  vi(() => {
+    var c;
+    (c = s.current) == null || c.focus();
+  }, []), vi(() => {
+    const c = (h) => {
+      h.key === "Escape" && o();
     };
-    return document.addEventListener("keydown", f), () => document.removeEventListener("keydown", f);
+    return document.addEventListener("keydown", c), () => document.removeEventListener("keydown", c);
   }, [o]);
-  const g = n.trim() ? ce(n) : gt, y = pe((f) => {
-    e(f);
+  const f = r.trim() ? oo(r) : bt, g = lo((c) => {
+    e(c);
   }, [e]);
-  return /* @__PURE__ */ P.jsx("div", { className: "orca-menu orca-context-menu", children: /* @__PURE__ */ P.jsxs("div", { className: "orca-icon-picker", style: { width: "300px" }, children: [
-    /* @__PURE__ */ P.jsxs("div", { className: "orca-icon-picker-header", style: {
+  return /* @__PURE__ */ _.jsx("div", { className: "orca-menu orca-context-menu", children: /* @__PURE__ */ _.jsxs("div", { className: "orca-icon-picker", style: { width: "300px" }, children: [
+    /* @__PURE__ */ _.jsxs("div", { className: "orca-icon-picker-header", style: {
       display: "flex",
       alignItems: "center",
       marginBottom: "8px",
       gap: "4px"
     }, children: [
-      /* @__PURE__ */ P.jsx("span", { className: "orca-input orca-icon-picker-search", style: { flex: "1 1 0%" }, children: /* @__PURE__ */ P.jsxs("span", { className: "orca-input-input", children: [
-        /* @__PURE__ */ P.jsx("i", { className: "ti ti-search orca-input-pre" }),
-        /* @__PURE__ */ P.jsx(
+      /* @__PURE__ */ _.jsx("span", { className: "orca-input orca-icon-picker-search", style: { flex: "1 1 0%" }, children: /* @__PURE__ */ _.jsxs("span", { className: "orca-input-input", children: [
+        /* @__PURE__ */ _.jsx("i", { className: "ti ti-search orca-input-pre" }),
+        /* @__PURE__ */ _.jsx(
           "input",
           {
-            ref: c,
+            ref: s,
             className: "orca-input-actualinput",
-            placeholder: B("settings-pin.search-icons"),
-            value: n,
-            onChange: (f) => l(f.target.value)
+            placeholder: at("settings-pin.search-icons"),
+            value: r,
+            onChange: (c) => a(c.target.value)
           }
         )
       ] }) }),
-      /* @__PURE__ */ P.jsx(
+      /* @__PURE__ */ _.jsx(
         "button",
         {
           className: "orca-button outline",
           tabIndex: -1,
           onClick: o,
-          title: B("settings-pin.clear"),
-          children: /* @__PURE__ */ P.jsx("i", { className: "ti ti-ban" })
+          title: at("settings-pin.clear"),
+          children: /* @__PURE__ */ _.jsx("i", { className: "ti ti-ban" })
         }
       )
     ] }),
-    /* @__PURE__ */ P.jsx("div", { className: "orca-icon-picker-content", style: {
+    /* @__PURE__ */ _.jsx("div", { className: "orca-icon-picker-content", style: {
       width: "300px",
       maxHeight: "250px",
       overflowY: "auto"
-    }, children: g.length === 0 ? /* @__PURE__ */ P.jsx("div", { style: {
+    }, children: f.length === 0 ? /* @__PURE__ */ _.jsx("div", { style: {
       textAlign: "center",
       padding: "16px",
       color: "var(--orca-color-text-2)"
-    }, children: B("settings-pin.no-icons-found") }) : /* @__PURE__ */ P.jsx("div", { style: {
+    }, children: at("settings-pin.no-icons-found") }) : /* @__PURE__ */ _.jsx("div", { style: {
       display: "grid",
       gridTemplateColumns: "repeat(auto-fill, minmax(36px, 1fr))",
       gap: "2px"
-    }, children: g.map((f) => /* @__PURE__ */ P.jsx(
+    }, children: f.map((c) => /* @__PURE__ */ _.jsx(
       "button",
       {
         className: "orca-button plain",
@@ -1876,334 +1884,678 @@ function ge({ selectedIcon: i, onSelect: e, onClose: o }) {
           alignItems: "center",
           justifyContent: "center",
           borderRadius: "6px",
-          background: i === f ? "var(--orca-color-primary-5)" : "transparent",
-          color: i === f ? "#fff" : "inherit"
+          background: t === c ? "var(--orca-color-primary-5)" : "transparent",
+          color: t === c ? "#fff" : "inherit"
         },
-        onClick: () => y(f),
-        title: f,
-        children: /* @__PURE__ */ P.jsx("i", { className: f, style: { fontSize: "18px" } })
+        onClick: () => g(c),
+        title: c,
+        children: /* @__PURE__ */ _.jsx("i", { className: c, style: { fontSize: "18px" } })
       },
-      f
+      c
     )) }) })
   ] }) });
 }
-const me = window.React;
-let T = null, tt = null, U = null, z = null;
-const et = /* @__PURE__ */ new Map();
-function he() {
-  const i = new MutationObserver(() => {
-    const n = document.querySelector(".orca-modal-overlay"), l = n == null ? void 0 : n.querySelector(".orca-settings");
-    n && l && getComputedStyle(n).display !== "none" ? T || Vt(l) : T && ei();
-  });
-  i.observe(document.body, { childList: !0, subtree: !0 }), tt = () => i.disconnect();
+const co = window.React;
+let lt = null, A = null, st = null, M = null;
+const wt = /* @__PURE__ */ new Map(), yi = 22, uo = 14, fo = 6;
+function po() {
+  const t = document.querySelector(".orca-panels-container") || document.body;
+  lt = new MutationObserver((r) => {
+    const a = document.querySelector(".orca-modal-overlay"), s = a == null ? void 0 : a.querySelector(".orca-settings");
+    a && s && getComputedStyle(a).display !== "none" ? A || wi(s) : A && Mi();
+  }), lt.observe(t, { childList: !0, subtree: !0 });
   const e = document.querySelector(".orca-modal-overlay"), o = e == null ? void 0 : e.querySelector(".orca-settings");
-  e && o && getComputedStyle(e).display !== "none" && Vt(o);
+  e && o && getComputedStyle(e).display !== "none" && wi(o);
 }
-function Vt(i) {
-  T && T.disconnect(), Wt(i), T = new MutationObserver(() => {
-    Wt(i);
-  }), T.observe(i, { childList: !0, subtree: !0 });
+function wi(t) {
+  A && A.disconnect(), ki(t);
+  let e = null;
+  A = new MutationObserver(() => {
+    e != null && cancelAnimationFrame(e), e = requestAnimationFrame(() => {
+      ki(t), e = null;
+    });
+  }), A.observe(t, { childList: !0, subtree: !0 });
 }
-function Wt(i) {
-  const e = i.querySelectorAll(".item-horizontal, .item-vertical");
+function ki(t) {
+  const e = t.querySelectorAll(".item-horizontal, .item-vertical");
   for (const o of e) {
-    const n = o;
-    n.dataset.pinProcessed || be(n);
+    const r = o;
+    r.dataset.pinProcessed || go(r);
   }
-  ve(i);
+  mo(t);
 }
-function be(i) {
-  i.dataset.pinProcessed = "true";
-  const e = Wi(i);
-  e && Ht(e) && ii(i, e);
+function go(t) {
+  t.dataset.pinProcessed = "true";
+  const e = ze(t);
+  e && Di(e) && Ii(t, e);
 }
-function ve(i) {
-  var y, f, b;
-  const e = i.querySelector(".sections .selected");
+function mo(t) {
+  var g, c, h;
+  const e = t.querySelector(".sections .selected");
   if (!e || !e.classList.contains("plugin-item")) return;
-  const o = e.querySelector("span"), n = ((y = o == null ? void 0 : o.textContent) == null ? void 0 : y.trim()) || "";
-  if (!n) return;
-  const l = (f = orca.state.plugins) == null ? void 0 : f[n];
-  if (!(l != null && l.schema)) return;
-  const c = i.querySelector("section .orca-memoizedviews-active");
-  if (!c) return;
-  const g = c.querySelectorAll(".item-horizontal, .item-vertical");
-  for (const k of g) {
-    const R = k;
-    if (R.dataset.pinProcessed || !R.querySelector("button.orca-switch, button.orca-switch-on")) continue;
-    const L = R.querySelector(".title"), N = ((b = L == null ? void 0 : L.textContent) == null ? void 0 : b.trim()) || "";
-    let K = "";
-    for (const [D, h] of Object.entries(l.schema))
-      if ((h == null ? void 0 : h.label) === N || h != null && h.label && N.includes(h.label)) {
-        K = D;
+  const o = e.querySelector("span"), r = ((g = o == null ? void 0 : o.textContent) == null ? void 0 : g.trim()) || "";
+  if (!r) return;
+  const a = (c = orca.state.plugins) == null ? void 0 : c[r];
+  if (!(a != null && a.schema)) return;
+  const s = t.querySelector("section .orca-memoizedviews-active");
+  if (!s) return;
+  const f = s.querySelectorAll(".item-horizontal, .item-vertical");
+  for (const S of f) {
+    const C = S;
+    if (C.dataset.pinProcessed || !C.querySelector("button.orca-switch, button.orca-switch-on")) continue;
+    const tt = C.querySelector(".title"), Y = ((h = tt == null ? void 0 : tt.textContent) == null ? void 0 : h.trim()) || "";
+    let it = "";
+    for (const [O, v] of Object.entries(a.schema))
+      if ((v == null ? void 0 : v.label) === Y || v != null && v.label && Y.includes(v.label)) {
+        it = O;
         break;
       }
-    if (!K) continue;
-    R.dataset.pinProcessed = "true";
-    const G = {
-      section: n,
-      title: N,
+    if (!it) continue;
+    C.dataset.pinProcessed = "true";
+    const dt = {
+      section: r,
+      title: Y,
       controlType: "switch",
       isPlugin: !0,
-      pluginName: n,
-      key: K
+      pluginName: r,
+      key: it
     };
-    Ht(G) && ii(R, G);
+    Di(dt) && Ii(C, dt);
   }
 }
-function ii(i, e) {
-  const o = ae(e.section, e.title, e.isPlugin, e.pluginName), n = pt(o), l = i.querySelector(".title"), c = l == null ? void 0 : l.querySelector(`[data-padd-mount="${o}"]`);
-  if (c) {
-    const f = et.get(o);
-    if (f) {
-      rt(f, c, e, o, n);
+function Ii(t, e) {
+  const o = to(e.section, e.title, e.isPlugin, e.pluginName), r = Mt(o), a = t.querySelector(".title"), s = a == null ? void 0 : a.querySelector(`[data-padd-mount="${o}"]`);
+  if (s) {
+    const c = wt.get(o);
+    if (c) {
+      kt(c, s, e, o, r);
       return;
     }
   }
-  const g = document.createElement("span");
-  g.style.cssText = "display: inline-flex; margin-left: 6px;", g.dataset.paddMount = o, l ? l.appendChild(g) : i.insertBefore(g, i.firstChild);
-  const y = window.createRoot(g);
-  et.set(o, y), rt(y, g, e, o, n), i.dataset.pinId = o;
+  const f = document.createElement("span");
+  f.style.cssText = `display: inline-flex; margin-left: ${fo}px;`, f.dataset.paddMount = o, a ? a.appendChild(f) : t.insertBefore(f, t.firstChild);
+  const g = window.createRoot(f);
+  wt.set(o, g), kt(g, f, e, o, r), t.dataset.pinId = o;
 }
-function rt(i, e, o, n, l) {
-  const c = me.createElement, g = { current: null }, y = {
-    width: "22px",
-    height: "22px",
+function kt(t, e, o, r, a) {
+  const s = co.createElement, f = { current: null }, g = {
+    width: `${yi}px`,
+    height: `${yi}px`,
     padding: 0,
     display: "inline-flex",
     alignItems: "center",
     justifyContent: "center",
-    fontSize: "14px",
-    opacity: l ? 1 : 0.7,
+    fontSize: `${uo}px`,
+    opacity: a ? 1 : 0.7,
     transition: "opacity 0.2s",
     cursor: "pointer",
     background: "none",
     border: "none",
     color: "inherit"
-  }, f = l ? l.icon : "ti ti-plus", b = l ? "var(--orca-color-primary-5)" : void 0, k = l ? `${l.title} - ${B("settings-pin.unpin")}` : B("settings-pin.pin"), R = (S) => {
-    S.stopPropagation(), S.preventDefault(), pt(n) ? oe(n).then(() => {
-      rt(i, e, o, n, void 0);
-    }) : ye(g.current, o, n, () => {
-      rt(i, e, o, n, pt(n));
+  }, c = a ? a.icon : "ti ti-plus", h = a ? "var(--orca-color-primary-5)" : void 0, S = a ? `${a.title} - ${at("settings-pin.unpin")}` : at("settings-pin.pin"), C = (x) => {
+    x.stopPropagation(), x.preventDefault(), Mt(r) ? Ze(r).then(() => {
+      kt(t, e, o, r, void 0);
+    }) : ho(f.current, o, r, () => {
+      kt(t, e, o, r, Mt(r));
     });
   };
-  i.render(
-    c(
+  t.render(
+    s(
       orca.components.Tooltip,
-      { text: k, placement: "horizontal" },
-      c(
+      { text: S, placement: "horizontal" },
+      s(
         "button",
         {
-          ref: (S) => {
-            g.current = S;
+          ref: (x) => {
+            f.current = x;
           },
           className: "orca-button plain settings-pin-btn",
-          style: y,
-          onClick: R,
+          style: g,
+          onClick: C,
           onMouseEnter: () => {
-            const S = g.current;
-            S && (S.style.opacity = "1");
+            const x = f.current;
+            x && (x.style.opacity = "1");
           },
           onMouseLeave: () => {
-            const S = g.current;
-            S && (S.style.opacity = ne(n) ? "1" : "0.7");
+            const x = f.current;
+            x && (x.style.opacity = Qe(r) ? "1" : "0.7");
           }
         },
-        c("i", { className: f, style: b ? { color: b } : void 0 })
+        s("i", { className: c, style: h ? { color: h } : void 0 })
       )
     )
   );
 }
-function ye(i, e, o, n) {
-  const l = document.querySelector(".orca-modal-overlay");
-  if (!l) {
+function ho(t, e, o, r) {
+  const a = document.querySelector(".orca-modal-overlay");
+  if (!a) {
     console.warn("图标选择器：未找到设置面板 overlay");
     return;
   }
-  z = document.createElement("div"), z.id = "settings-pin-icon-picker-mount", z.style.cssText = "position: absolute; z-index: 10000;", l.appendChild(z), U = window.createRoot(z);
-  const c = (f) => {
-    if (!f) return;
-    const b = Xi(e), k = {
+  M = document.createElement("div"), M.id = "settings-pin-icon-picker-mount", M.style.cssText = "position: absolute; z-index: 10000;", a.appendChild(M), st = window.createRoot(M);
+  const s = (c) => {
+    if (!c) return;
+    const h = He(e), S = {
       id: o,
-      icon: f,
+      icon: c,
       section: e.section,
       title: e.title,
-      appKey: b.type === "app" ? b.appKey : b.settingKey,
+      appKey: h.type === "app" ? h.appKey : h.settingKey,
       isPlugin: e.isPlugin,
       pluginName: e.pluginName,
       controlType: "switch"
     };
-    re(k).then(() => {
-      n();
-    }), mt();
-  }, g = () => {
-    mt();
-  }, y = window.React.createElement;
-  U.render(
-    y(
+    Je(S).then(() => {
+      r();
+    }), Nt();
+  }, f = () => {
+    Nt();
+  }, g = window.React.createElement;
+  st.render(
+    g(
       orca.components.Popup,
       {
         visible: !0,
-        onClose: g,
-        refElement: { current: i },
+        onClose: f,
+        refElement: { current: t },
         placement: "horizontal",
         defaultPlacement: "right",
         alignment: "top",
         offset: 4
       },
-      y(ge, {
+      g(so, {
         selectedIcon: "",
-        onSelect: c,
-        onClose: g
+        onSelect: s,
+        onClose: f
       })
     )
   );
 }
-function mt() {
-  U && (U.unmount(), U = null), z && (z.remove(), z = null);
+function Nt() {
+  st && (st.unmount(), st = null), M && (M.remove(), M = null);
 }
-function ei() {
-  T && (T.disconnect(), T = null), et.forEach((i) => {
+function Mi() {
+  A && (A.disconnect(), A = null), wt.forEach((t) => {
     try {
-      i.unmount();
+      t.unmount();
     } catch {
     }
-  }), et.clear(), document.querySelectorAll("[data-padd-mount]").forEach((i) => i.remove()), document.querySelectorAll(".settings-pin-btn").forEach((i) => i.remove()), document.querySelectorAll("[data-pin-processed]").forEach((i) => {
-    delete i.dataset.pinProcessed, delete i.dataset.pinId;
-  }), mt();
+  }), wt.clear(), document.querySelectorAll("[data-padd-mount]").forEach((t) => t.remove()), document.querySelectorAll(".settings-pin-btn").forEach((t) => t.remove()), document.querySelectorAll("[data-pin-processed]").forEach((t) => {
+    delete t.dataset.pinProcessed, delete t.dataset.pinId;
+  }), Nt();
 }
-function we() {
-  ei(), tt && (tt(), tt = null);
+function bo() {
+  Mi(), lt && (lt.disconnect(), lt = null);
 }
-const ke = window.React;
-function Se(i) {
+const vo = window.React;
+let J = () => !1;
+function yo(t) {
+  J = t;
+}
+function wo(t) {
   return (e, o) => {
-    const n = ke.createElement, l = Bt(i), c = (g) => {
-      const f = !Bt(i);
-      xe(i, f);
-      const b = g.currentTarget, k = b == null ? void 0 : b.querySelector("i");
-      k && (k.style.color = f ? "var(--orca-color-primary-5)" : "");
+    const r = vo.createElement, a = Si(t), s = (f) => {
+      const c = !Si(t);
+      ko(t, c);
     };
-    return n(
+    return r(
       orca.components.Tooltip,
-      { text: i.title, placement: "horizontal" },
-      n(
+      { text: t.title, placement: "horizontal" },
+      r(
         "button",
         {
           className: "orca-button plain orca-block-editor-sidetools-btn",
-          onClick: c
+          onClick: s
         },
-        n("i", {
-          className: i.icon,
-          style: l ? { color: "var(--orca-color-primary-5)" } : void 0
+        r("i", {
+          className: t.icon,
+          style: a ? { color: "var(--orca-color-primary-5)" } : void 0
         })
       )
     );
   };
 }
-function Bt(i) {
+function Si(t) {
   var o;
-  if (i.isPlugin && i.pluginName) {
-    const n = (o = orca.state.plugins) == null ? void 0 : o[i.pluginName];
-    return n != null && n.settings ? !!n.settings[i.appKey] : !1;
+  if (t.isPlugin && t.pluginName) {
+    const r = (o = orca.state.plugins) == null ? void 0 : o[t.pluginName];
+    return r != null && r.settings ? !!r.settings[t.appKey] : !1;
   }
-  return !!orca.state.settings[i.appKey];
+  return !!orca.state.settings[t.appKey];
 }
-function xe(i, e) {
+function ko(t, e) {
   var o;
-  if (i.isPlugin && i.pluginName) {
-    const n = (o = orca.state.plugins) == null ? void 0 : o[i.pluginName];
-    if (n != null && n.settings) {
-      const l = n.settings[i.appKey];
-      n.settings[i.appKey] = e, J() && console.debug(
-        `[PADD] 开关切换: ${i.pluginName}.${i.title} (${i.appKey})`,
-        `${JSON.stringify(l)} → ${e}`
+  if (t.isPlugin && t.pluginName) {
+    const r = (o = orca.state.plugins) == null ? void 0 : o[t.pluginName];
+    if (r != null && r.settings) {
+      const a = r.settings[t.appKey];
+      r.settings[t.appKey] = e, J() && console.debug(
+        `[PADD] 开关切换: ${t.pluginName}.${t.title} (${t.appKey})`,
+        `${JSON.stringify(a)} → ${e}`
       );
     }
   } else {
-    const n = i.appKey, l = orca.state.settings[n];
-    if (typeof l == "number") {
-      const c = e ? 1 : 0;
-      orca.state.settings[n] = c, J() && console.debug(
-        `[PADD] 开关切换: ${i.section}.${i.title} (key=${n})`,
-        `${l} → ${c}`
+    const r = t.appKey, a = orca.state.settings[r];
+    if (typeof a == "number") {
+      const s = e ? 1 : 0;
+      orca.state.settings[r] = s, J() && console.debug(
+        `[PADD] 开关切换: ${t.section}.${t.title} (key=${r})`,
+        `${a} → ${s}`
       );
     } else
-      orca.state.settings[n] = e, J() && console.debug(
-        `[PADD] 开关切换: ${i.section}.${i.title} (key=${n})`,
-        `${l} → ${e}`
+      orca.state.settings[r] = e, J() && console.debug(
+        `[PADD] 开关切换: ${t.section}.${t.title} (key=${r})`,
+        `${a} → ${e}`
       );
   }
 }
-function ri(i) {
-  const e = `padd.${i.id}`;
+function Ni(t) {
+  const e = `padd.${t.id}`;
   orca.editorSidetools.registerEditorSidetool(e, {
-    render: Se(i)
+    render: wo(t)
   }), J() && console.debug(`[PADD] 已注册侧边栏工具: ${e}`);
 }
-function oi(i) {
-  const e = `padd.${i.id}`;
+function Li(t) {
+  const e = `padd.${t.id}`;
   orca.editorSidetools.unregisterEditorSidetool(e), J() && console.debug(`[PADD] 已注销侧边栏工具: ${e}`);
 }
-const { subscribe: Ee } = window.Valtio;
-let _, it = null, q = !0, ot = !1;
-const Pe = {
+const k = "orca-lcars-width-handle", St = "orca-lcars-width-handle-left", Lt = "orca-lcars-width-handle-right", L = "orca-lcars-editor-width", ji = "lcars-editor-width", Et = "lcars-debug-panel", So = 20, Ei = 10, Eo = 2, jt = 52, zi = 1.5, xi = 10;
+let qt = () => !1;
+function xo(t) {
+  qt = t;
+}
+const qi = 0, Po = 85, xt = 0;
+let Ft, K = !1, E = xt, G = !1, Fi = 0, Wi = 0, Bi = 1, N = null, Z = null, vt = !1, ct = null, B = null, q = null;
+function Ro(t) {
+  Ft = t, $o(), zo(), Mo(), Lo();
+}
+function _o() {
+  K = !1, Q(), No(), jo(), qo(), Bt(), Vt(), Ao(), ut();
+}
+function Vi(t, e) {
+  const o = K !== t, r = E !== e;
+  K = t, E = Rt(e), (o || r) && Q();
+}
+function Co() {
+  return E;
+}
+async function Do() {
+  try {
+    const t = await orca.plugins.getData(Ft, "editorWidthV2");
+    if (typeof t == "number") return Rt(t);
+    if (typeof t == "string") {
+      const e = parseInt(t, 10);
+      if (!isNaN(e)) return Rt(e);
+    }
+  } catch {
+  }
+  return xt;
+}
+function ft() {
+  return !!document.querySelector(".orca-panel.orca-wide");
+}
+function V() {
+  const t = [];
+  return document.querySelectorAll(".orca-block-editor").forEach((e) => {
+    e.getBoundingClientRect().width > 0 && t.push(e);
+  }), t;
+}
+function ut() {
+  document.querySelectorAll(".orca-block-editor").forEach((t) => {
+    delete t.dataset.lcarsOrigGrid;
+  });
+}
+function Wt(t) {
+  const e = t.dataset.lcarsOrigGrid;
+  if (e)
+    try {
+      return JSON.parse(e);
+    } catch {
+    }
+  const o = t.classList.contains(L);
+  t.classList.remove(L);
+  const r = t.getBoundingClientRect().width, a = getComputedStyle(t).gridTemplateColumns;
+  o && t.classList.add(L);
+  const s = a.match(/[\d.]+/g);
+  if (s && s.length >= 3) {
+    const f = parseFloat(s[0]), g = parseFloat(s[1]), c = parseFloat(s[2]);
+    if (g > 0 && f > 0 && r > 0) {
+      const h = { side: f, editor: g, post: c, total: r };
+      return t.dataset.lcarsOrigGrid = JSON.stringify(h), h;
+    }
+  }
+  return null;
+}
+function Hi(t, e, o) {
+  if (t <= 0)
+    return { side: e.side, editor: e.editor, post: e.post };
+  const r = t / 100, s = 1 - Ki(o) * zi / e.post, f = Math.min(r, s), g = e.side * (1 - f), c = e.post * (1 - f), h = e.total - g - c;
+  return { side: g, editor: h, post: c };
+}
+function Ki(t) {
+  const e = t.querySelector(".orca-block-editor-go-btns");
+  return e && Math.ceil(e.getBoundingClientRect().width) || jt;
+}
+function $o() {
+  const t = `
+    .orca-block-editor.${L} {
+      grid-template-columns: var(--lcars-side-col) [editor-start] var(--lcars-editor-col) [editor-end post-start] var(--lcars-post-col) [post-end] !important;
+      overflow-x: hidden !important;
+    }
+
+    .orca-block-editor.${L} > .orca-block-editor-main {
+      position: relative !important;
+      overflow: visible !important;
+      will-change: width;
+    }
+
+    /* 拖拽时降低 block 渲染精度，保留布局轮廓 */
+    .orca-block-editor.lcars-dragging .orca-block {
+      content-visibility: auto !important;
+      contain: layout style !important;
+    }
+
+    .${k} {
+      position: absolute;
+      top: 0;
+      width: ${So}px;
+      height: 100%;
+      cursor: col-resize;
+      z-index: 10;
+      pointer-events: auto;
+    }
+    .${Lt} { right: -40px; }
+    .${St} { left: -40px; }
+
+    .${k}::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      width: ${Eo}px;
+      height: 100%;
+      background: var(--lcars-handle-color, var(--orca-color-primary-5, #4a9eff));
+      border-radius: 1px;
+      opacity: 0;
+      transition: opacity 0.2s ease;
+    }
+    .${Lt}::before { right: ${Ei}px; }
+    .${St}::before { left: ${Ei}px; }
+
+    .${k}:hover::before,
+    .${k}.dragging::before { opacity: 0.8; }
+
+    /* hover 任一手柄时，同 editor 下两条指示线一起显示
+       注意：:has() 需 Chrome 105+ / Electron 22+（Orca 用 Electron 28+，兼容无问题）
+       此规则特异性(0-4-1)高于单手柄 :hover(0-2-1)，修改 opacity 时注意同步 */
+    .orca-block-editor-main:has(.${k}:hover) .${k}::before,
+    .orca-block-editor-main:has(.${k}.dragging) .${k}::before { opacity: 0.8; }
+
+    .${k}.lcars-debug {
+      background: rgba(0, 120, 255, 0.15) !important;
+      border: 1px dashed rgba(0, 120, 255, 0.4) !important;
+    }
+    .${k}.lcars-debug::before {
+      background: red !important;
+      opacity: 1 !important;
+    }
+
+    body.lcars-dragging-active, body.lcars-dragging-active * {
+      cursor: col-resize !important;
+      user-select: none !important;
+    }
+
+    #${Et} {
+      position: fixed;
+      top: 8px;
+      left: 8px;
+      z-index: 99999;
+      font-family: 'Consolas', 'Monaco', monospace;
+      font-size: 12px;
+      line-height: 1.6;
+      color: red;
+      background: rgba(0, 0, 0, 0.8);
+      padding: 8px 12px;
+      border-radius: 4px;
+      pointer-events: none;
+      white-space: pre;
+    }
+  `;
+  orca.themes.injectCSS(t, ji);
+}
+function Ao() {
+  orca.themes.removeCSS(ji);
+}
+function Q() {
+  const t = V(), e = ft();
+  if (!K || e || t.length === 0) {
+    document.querySelectorAll(".orca-block-editor").forEach((o) => {
+      const r = o;
+      r.classList.remove(L), r.style.removeProperty("--lcars-side-col"), r.style.removeProperty("--lcars-editor-col"), r.style.removeProperty("--lcars-post-col");
+      const a = r.querySelector(".orca-block-editor-main");
+      a && (a.style.removeProperty("max-width"), a.style.removeProperty("margin-inline"), a.style.removeProperty("width"));
+    }), ut(), Bt(), Pt();
+    return;
+  }
+  t.forEach((o) => {
+    const r = Wt(o);
+    if (!r) return;
+    o.classList.add(L);
+    const a = Hi(E, r, o);
+    o.style.setProperty("--lcars-side-col", `${Math.round(a.side)}px`), o.style.setProperty("--lcars-editor-col", `${Math.round(a.editor)}px`), o.style.setProperty("--lcars-post-col", `${Math.round(a.post)}px`);
+  }), document.querySelectorAll(".orca-block-editor").forEach((o) => {
+    const r = o;
+    t.includes(r) || (r.classList.remove(L), r.style.removeProperty("--lcars-side-col"), r.style.removeProperty("--lcars-editor-col"), r.style.removeProperty("--lcars-post-col"), delete r.dataset.lcarsOrigGrid);
+  }), To(), Pt();
+}
+function To() {
+  if (!K || ft()) {
+    Bt();
+    return;
+  }
+  V().forEach((e) => {
+    const o = e.querySelector(".orca-block-editor-main");
+    o && (Pi(o, Lt), Pi(o, St));
+  });
+}
+function Pi(t, e) {
+  if (t.querySelector(`:scope > .${e}`)) return;
+  const o = document.createElement("div");
+  o.className = `${k} ${e}`, qt() && o.classList.add("lcars-debug"), o.title = `编辑区宽度: ${E}%（双击重置）`, t.appendChild(o);
+}
+function Bt() {
+  document.querySelectorAll(`.${k}`).forEach((t) => t.remove());
+}
+function Oo() {
+  document.querySelectorAll(`.${k}`).forEach((t) => {
+    t.title = `编辑区宽度: ${E}%（双击重置）`;
+  });
+}
+function Io() {
+  let t = document.getElementById(Et);
+  return t || (t = document.createElement("div"), t.id = Et, document.body.appendChild(t)), t;
+}
+function Vt() {
+  var t;
+  (t = document.getElementById(Et)) == null || t.remove();
+}
+function Pt() {
+  if (!qt()) {
+    Vt();
+    return;
+  }
+  const t = Io(), e = V();
+  document.querySelectorAll(`.${k}`).length;
+  const o = [
+    `百分比: ${E}%`,
+    `宽屏模式: ${ft() ? "是" : "否"}`
+  ];
+  e.forEach((r, a) => {
+    const s = Wt(r), f = r.querySelector(".orca-block-editor-main"), g = r.querySelectorAll(`.${k}`).length;
+    o.push(`--- Panel ${a + 1} ---`), o.push(`手柄数: ${g}`), s && o.push(
+      `原始侧边栏: ${s.side.toFixed(0)}px`,
+      `原始编辑列: ${s.editor.toFixed(0)}px`,
+      `原始后列: ${s.post.toFixed(0)}px`
+    ), o.push(
+      `当前main宽度: ${f ? f.getBoundingClientRect().width.toFixed(0) : "N/A"}px`,
+      `编辑器宽度: ${r.getBoundingClientRect().width.toFixed(0)}px`
+    );
+  }), t.textContent = o.join(`
+`);
+}
+function Mo() {
+  const t = document.querySelector(".orca-panels-container") || document.body;
+  ct = new MutationObserver(() => {
+    K && (G || (q != null && cancelAnimationFrame(q), q = requestAnimationFrame(() => {
+      B && document.querySelectorAll(".orca-block-editor").forEach((o) => {
+        B.observe(o);
+      }), ft() && ut();
+      const e = V()[0];
+      e != null && e.dataset.lcarsOrigGrid || ut(), Q(), q = null;
+    })));
+  }), ct.observe(t, { childList: !0, subtree: !0 });
+}
+function No() {
+  ct && (ct.disconnect(), ct = null), q != null && (cancelAnimationFrame(q), q = null);
+}
+function Lo() {
+  B = new ResizeObserver(() => {
+    !K || G || (ut(), Q());
+  }), document.querySelectorAll(".orca-block-editor").forEach((t) => {
+    B.observe(t);
+  });
+}
+function jo() {
+  B && (B.disconnect(), B = null);
+}
+function zo() {
+  document.addEventListener("mousedown", Yi, !0), document.addEventListener("mousemove", Ui), document.addEventListener("mouseup", Ht), document.addEventListener("dblclick", Xi, !0), window.addEventListener("blur", Gi);
+}
+function qo() {
+  document.removeEventListener("mousedown", Yi, !0), document.removeEventListener("mousemove", Ui), document.removeEventListener("mouseup", Ht), document.removeEventListener("dblclick", Xi, !0), window.removeEventListener("blur", Gi);
+}
+function Gi() {
+  G && Ht();
+}
+function Yi(t) {
+  const e = t.target;
+  if (!e.classList.contains(k)) return;
+  t.preventDefault();
+  const o = e.closest(".orca-block-editor");
+  o && (N = Wt(o)), G = !0, Fi = t.clientX, Wi = E, Bi = e.classList.contains(St) ? -1 : 1, e.classList.add("dragging"), document.body.classList.add("lcars-dragging-active"), o && o.classList.add("lcars-dragging");
+}
+function Ui(t) {
+  var S;
+  if (!G || !N || ft()) return;
+  const e = (N.side + N.post) / 2;
+  if (e <= 0) return;
+  const o = (S = t.target) == null ? void 0 : S.closest(".orca-block-editor"), s = (1 - (o ? Ki(o) : jt) * zi / N.post) * 100, c = (t.clientX - Fi) * Bi / e * 100;
+  let h = Math.round((Wi + c) * 10) / 10;
+  h = Math.min(s, Math.max(qi, h)), Math.abs(h - E) >= 0.1 && (E = h, vt = !0, Z == null && (Z = requestAnimationFrame(() => {
+    vt && Fo(), vt = !1, Z = null;
+  })));
+}
+function Fo() {
+  if (!N || V().length === 0) return;
+  const e = Hi(E, N, V()[0]), o = `${Math.round(e.side)}px`, r = `${Math.round(e.editor)}px`, a = `${Math.round(e.post)}px`;
+  V().forEach((s) => {
+    s.style.setProperty("--lcars-side-col", o), s.style.setProperty("--lcars-editor-col", r), s.style.setProperty("--lcars-post-col", a);
+  }), Pt();
+}
+function Ht() {
+  G && (G = !1, N = null, vt = !1, Z != null && (cancelAnimationFrame(Z), Z = null), E = Rt(Math.round(E * xi) / xi), document.querySelectorAll(`.${k}.dragging`).forEach((t) => t.classList.remove("dragging")), document.body.classList.remove("lcars-dragging-active"), document.querySelectorAll(".lcars-dragging").forEach((t) => t.classList.remove("lcars-dragging")), Q(), Ji());
+}
+function Xi(t) {
+  t.target.classList.contains(k) && (t.preventDefault(), E !== xt && (E = xt, Q(), Oo(), Ji()));
+}
+function Wo(t) {
+  document.querySelectorAll(`.${k}`).forEach((e) => {
+    t ? e.classList.add("lcars-debug") : e.classList.remove("lcars-debug");
+  }), t ? Pt() : Vt();
+}
+async function Ji() {
+  try {
+    await orca.plugins.setData(Ft, "editorWidthV2", E);
+  } catch (t) {
+    console.error("[LCARS] 保存编辑区宽度失败:", t);
+  }
+}
+function Rt(t) {
+  return Math.min(Po, Math.max(qi, t));
+}
+const { subscribe: Bo } = window.Valtio;
+let $, yt = null, F = !0, H = !1, nt = !1;
+const Vo = {
   paddEnabled: {
-    label: "PADD | 设置面板钉选",
-    description: "将虎鲸笔记设置面板中的开关类型设置钉选到编辑器侧边栏，一键切换。关闭后侧边栏钉选图标将隐藏。",
+    label: "📱 个人终端 | PADD ► 设置面板钉选 ◄",
+    description: "将虎鲸笔记设置面板中的开关类型设置钉选到编辑器侧边栏，一键切换。PADD（Personal Access Display Device）是星际迷航中的个人掌上终端。",
     type: "boolean",
     defaultValue: !0
   },
+  editorWidthMode: {
+    label: "✨ 变形场 | Morphic Field ► 编辑区域宽度调整 ◄",
+    description: "启用后可拖拽手柄展宽编辑区。0%=原始宽度，拖拽至极限=占满可用空间。双击手柄重置。变形场（Morphic Field）是星际迷航中形态变换的底层力场。",
+    type: "boolean",
+    defaultValue: !1
+  },
   debugMode: {
-    label: "调试模式",
-    description: "开启后在控制台打印开关切换日志",
+    label: "🔧 调试模式",
+    description: "开启后在控制台打印开关切换日志，编辑区显示调试面板",
     type: "boolean",
     defaultValue: !1
   }
 };
-function J() {
-  return ot;
+function Ho() {
+  return H;
 }
-function Re() {
-  return q;
+function Ko() {
+  return F;
 }
-function ni() {
-  const i = Zt();
-  for (const e of i)
-    ri(e);
-  he(), console.log(`[PADD] 功能已启用，${i.length} 个设置已钉选`);
+function Zi() {
+  const t = Ti();
+  for (const e of t)
+    Ni(e);
+  po(), console.log(`[PADD] 功能已启用，${t.length} 个设置已钉选`);
 }
-function ai() {
-  const i = Zt();
-  for (const e of i)
-    oi(e);
-  we(), console.log("[PADD] 功能已禁用");
+function Qi() {
+  const t = Ti();
+  for (const e of t)
+    Li(e);
+  bo(), console.log("[PADD] 功能已禁用");
 }
-function Ut() {
-  var n;
-  const i = (n = orca.state.plugins[_]) == null ? void 0 : n.settings, e = (i == null ? void 0 : i.paddEnabled) !== !1, o = !!(i != null && i.debugMode);
-  e !== q && (q = e, console.log(`[PADD] 开关状态变化 → ${q}`), q ? ni() : ai()), o !== ot && (ot = o);
+function Ri() {
+  var a;
+  const t = (a = orca.state.plugins[$]) == null ? void 0 : a.settings, e = (t == null ? void 0 : t.paddEnabled) !== !1, o = !!(t != null && t.debugMode);
+  e !== F && (F = e, console.log(`[PADD] 开关状态变化 → ${F}`), F ? Zi() : Qi());
+  const r = !!(t != null && t.editorWidthMode);
+  r !== nt && (nt = r, console.log(`[LCARS] 编辑区宽度开关 → ${nt}`), Vi(nt, Co())), o !== H && (H = o, Wo(H));
 }
-async function Ce(i) {
-  _ = i, Ki(orca.state.locale, { "zh-CN": Yi }), console.log(`${_} LCARS 工具箱加载中...`);
+async function Go(t) {
+  var e;
+  $ = t, Me(orca.state.locale, { "zh-CN": Ne, en: Le }), console.log(`${$} LCARS 工具箱加载中...`);
   try {
-    te(_), Zi(() => ot), await ee(), await orca.plugins.setSettingsSchema(_, Pe);
-    const e = orca.state.plugins[_];
-    e && (e.settings || (e.settings = {}), e.settings.paddEnabled === void 0 && (e.settings.paddEnabled = !0)), ie((o, n) => {
-      q && (o && ri(o), n && oi({ id: n }));
-    }), Ut(), it = Ee(orca.state.plugins, () => {
-      Ut();
-    }), q && ni(), console.log(`${_} LCARS 工具箱已加载`);
-  } catch (e) {
-    console.error(`${_} 加载失败:`, e);
+    Ye($), Ge(() => H), yo(() => H), await Xe(), Ro($);
+    const o = await Do();
+    xo(() => H), await orca.plugins.setSettingsSchema($, Vo);
+    const r = orca.state.plugins[$];
+    r && (r.settings || (r.settings = {}), r.settings.paddEnabled === void 0 && (r.settings.paddEnabled = !0), r.settings.editorWidthMode === void 0 && (r.settings.editorWidthMode = !1)), Ue((f, g) => {
+      F && (f && Ni(f), g && Li({ id: g }));
+    });
+    const a = ((e = r == null ? void 0 : r.settings) == null ? void 0 : e.editorWidthMode) === !0;
+    nt = a, Vi(a, o), Ri();
+    const s = orca.state.plugins[$];
+    s && (yt = Bo(s, () => {
+      Ri();
+    })), F && Zi(), console.log(`${$} LCARS 工具箱已加载`);
+  } catch (o) {
+    console.error(`${$} 加载失败:`, o);
   }
 }
-async function _e() {
-  console.log(`${_} LCARS 工具箱卸载中...`), it && (it(), it = null), ai(), console.log(`${_} LCARS 工具箱已卸载`);
+async function Yo() {
+  console.log(`${$} LCARS 工具箱卸载中...`), yt && (yt(), yt = null), _o(), Qi(), console.log(`${$} LCARS 工具箱已卸载`);
 }
 export {
-  J as isDebugMode,
-  Re as isPADDEnabled,
-  Ce as load,
-  _e as unload
+  Ho as isDebugMode,
+  Ko as isPADDEnabled,
+  Go as load,
+  Yo as unload
 };
