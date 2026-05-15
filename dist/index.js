@@ -1,12 +1,12 @@
-let Ri = "en", _i = {};
-function Ie(t, e) {
-  Ri = t, _i = e;
+let _i = "en", Ci = {};
+function Ne(t, e) {
+  _i = t, Ci = e;
 }
 function $(t, e, o) {
   var a;
-  return ((a = _i[Ri]) == null ? void 0 : a[t]) ?? t;
+  return ((a = Ci[o ?? _i]) == null ? void 0 : a[t]) ?? t;
 }
-const Ne = {
+const bi = {
   "settings-pin.pin": "固定到侧边栏",
   "settings-pin.unpin": "取消固定",
   "settings-pin.search-icons": "搜索图标...",
@@ -123,10 +123,10 @@ function Ve(t, e) {
       return a;
   return console.debug(`插件 ${t} 的设置 "${e}" 未找到对应 key`), "";
 }
-function He(t) {
+function Ke(t) {
   return t.isPlugin && t.pluginName ? { type: "plugin", pluginName: t.pluginName, settingKey: String(t.key) } : { type: "app", appKey: Number(t.key) };
 }
-const Ke = [
+const Ge = [
   // 快捷键设置面板（无有效开关）
   { type: "section", value: "快捷键" },
   { type: "section", value: "Keyboard shortcuts" },
@@ -137,7 +137,7 @@ const Ke = [
   { type: "settingName", value: "启用插件" },
   { type: "settingName", value: "Enable plugin" }
 ];
-function Ci(t, e = Ke) {
+function Ai(t, e = Ge) {
   if (t.controlType !== "switch")
     return !1;
   for (const o of e)
@@ -154,11 +154,11 @@ function Ci(t, e = Ke) {
     }
   return !0;
 }
-let zt, Ai = () => !1;
+let zt, $i = () => !1;
 const O = /* @__PURE__ */ new Map();
 let B = null;
-function Ge(t) {
-  Ai = t;
+function He(t) {
+  $i = t;
 }
 function Ye(t) {
   zt = t;
@@ -174,13 +174,13 @@ async function Xe() {
       O.clear();
       for (const o of e)
         O.set(o.id, o);
-      Ai() && console.debug(`[PADD] 已加载 ${O.size} 个钉选设置`);
+      $i() && console.debug(`[PADD] 已加载 ${O.size} 个钉选设置`);
     }
   } catch (t) {
     console.warn("[PADD] 加载钉选设置失败:", t);
   }
 }
-async function $i() {
+async function Ti() {
   try {
     const t = Array.from(O.values());
     await orca.plugins.setData(zt, "pinned", JSON.stringify(t));
@@ -189,12 +189,12 @@ async function $i() {
   }
 }
 async function Je(t) {
-  O.set(t.id, t), await $i(), B == null || B(t);
+  O.set(t.id, t), await Ti(), B == null || B(t);
 }
 async function Ze(t) {
-  O.delete(t) && (await $i(), B == null || B(void 0, t));
+  O.delete(t) && (await Ti(), B == null || B(void 0, t));
 }
-function Ti() {
+function Oi() {
   return Array.from(O.values());
 }
 function It(t) {
@@ -207,12 +207,12 @@ function to(t, e, o, r) {
   const a = o ? "plugin" : "app", s = o && r ? `.${r}` : "";
   return `${a}${s}.${e}`;
 }
-var Oi = { exports: {} };
+var Mi = { exports: {} };
 const io = React;
-var nt = {}, bi;
+var nt = {}, vi;
 function eo() {
-  if (bi) return nt;
-  bi = 1;
+  if (vi) return nt;
+  vi = 1;
   /**
    * @license React
    * react-jsx-runtime.development.js
@@ -235,10 +235,10 @@ function eo() {
       {
         for (var n = arguments.length, l = new Array(n > 1 ? n - 1 : 0), u = 1; u < n; u++)
           l[u - 1] = arguments[u];
-        te("error", i, l);
+        ie("error", i, l);
       }
     }
-    function te(i, n, l) {
+    function ie(i, n, l) {
       {
         var u = M.ReactDebugCurrentFrame, m = u.getStackAddendum();
         m !== "" && (n += "%s", l = l.concat([m]));
@@ -248,23 +248,23 @@ function eo() {
         b.unshift("Warning: " + n), Function.prototype.apply.call(console[i], console, b);
       }
     }
-    var ie = !1, ee = !1, oe = !1, re = !1, ne = !1, Kt;
-    Kt = Symbol.for("react.module.reference");
-    function ae(i) {
-      return !!(typeof i == "string" || typeof i == "function" || i === r || i === s || ne || i === a || i === h || i === S || re || i === it || ie || ee || oe || typeof i == "object" && i !== null && (i.$$typeof === x || i.$$typeof === _ || i.$$typeof === f || i.$$typeof === g || i.$$typeof === c || // This needs to include all possible module reference object
+    var ee = !1, oe = !1, re = !1, ne = !1, ae = !1, Gt;
+    Gt = Symbol.for("react.module.reference");
+    function le(i) {
+      return !!(typeof i == "string" || typeof i == "function" || i === r || i === s || ae || i === a || i === h || i === S || ne || i === it || ee || oe || re || typeof i == "object" && i !== null && (i.$$typeof === x || i.$$typeof === _ || i.$$typeof === f || i.$$typeof === g || i.$$typeof === c || // This needs to include all possible module reference object
       // types supported by any Flight configuration anywhere since
       // we don't know which Flight build this will end up being used
       // with.
-      i.$$typeof === Kt || i.getModuleId !== void 0));
+      i.$$typeof === Gt || i.getModuleId !== void 0));
     }
-    function le(i, n, l) {
+    function se(i, n, l) {
       var u = i.displayName;
       if (u)
         return u;
       var m = n.displayName || n.name || "";
       return m !== "" ? l + "(" + m + ")" : l;
     }
-    function Gt(i) {
+    function Ht(i) {
       return i.displayName || "Context";
     }
     function I(i) {
@@ -292,12 +292,12 @@ function eo() {
         switch (i.$$typeof) {
           case g:
             var n = i;
-            return Gt(n) + ".Consumer";
+            return Ht(n) + ".Consumer";
           case f:
             var l = i;
-            return Gt(l._context) + ".Provider";
+            return Ht(l._context) + ".Provider";
           case c:
-            return le(i, i.render, "ForwardRef");
+            return se(i, i.render, "ForwardRef");
           case _:
             var u = i.displayName || null;
             return u !== null ? u : I(i.type) || "Memo";
@@ -316,7 +316,7 @@ function eo() {
     function ii() {
     }
     ii.__reactDisabledLog = !0;
-    function se() {
+    function ce() {
       {
         if (ot === 0) {
           Yt = console.log, Ut = console.info, Xt = console.warn, Jt = console.error, Zt = console.group, Qt = console.groupCollapsed, ti = console.groupEnd;
@@ -339,7 +339,7 @@ function eo() {
         ot++;
       }
     }
-    function ce() {
+    function ue() {
       {
         if (ot--, ot === 0) {
           var i = {
@@ -390,8 +390,8 @@ function eo() {
     }
     var Ct = !1, gt;
     {
-      var ue = typeof WeakMap == "function" ? WeakMap : Map;
-      gt = new ue();
+      var fe = typeof WeakMap == "function" ? WeakMap : Map;
+      gt = new fe();
     }
     function ei(i, n) {
       if (!i || Ct)
@@ -406,7 +406,7 @@ function eo() {
       var m = Error.prepareStackTrace;
       Error.prepareStackTrace = void 0;
       var b;
-      b = Rt.current, Rt.current = null, se();
+      b = Rt.current, Rt.current = null, ce();
       try {
         if (n) {
           var p = function() {
@@ -459,15 +459,15 @@ function eo() {
             }
         }
       } finally {
-        Ct = !1, Rt.current = b, ce(), Error.prepareStackTrace = m;
+        Ct = !1, Rt.current = b, ue(), Error.prepareStackTrace = m;
       }
       var J = i ? i.displayName || i.name : "", q = J ? pt(J) : "";
       return typeof i == "function" && gt.set(i, q), q;
     }
-    function fe(i, n, l) {
+    function de(i, n, l) {
       return ei(i, !1);
     }
-    function de(i) {
+    function pe(i) {
       var n = i.prototype;
       return !!(n && n.isReactComponent);
     }
@@ -475,7 +475,7 @@ function eo() {
       if (i == null)
         return "";
       if (typeof i == "function")
-        return ei(i, de(i));
+        return ei(i, pe(i));
       if (typeof i == "string")
         return pt(i);
       switch (i) {
@@ -487,7 +487,7 @@ function eo() {
       if (typeof i == "object")
         switch (i.$$typeof) {
           case c:
-            return fe(i.render);
+            return de(i.render);
           case _:
             return mt(i.type, n, l);
           case x: {
@@ -508,7 +508,7 @@ function eo() {
       } else
         ri.setExtraStackFrame(null);
     }
-    function pe(i, n, l, u, m) {
+    function ge(i, n, l, u, m) {
       {
         var b = Function.call.bind(rt);
         for (var p in i)
@@ -527,17 +527,17 @@ function eo() {
           }
       }
     }
-    var ge = Array.isArray;
+    var me = Array.isArray;
     function At(i) {
-      return ge(i);
+      return me(i);
     }
-    function me(i) {
+    function he(i) {
       {
         var n = typeof Symbol == "function" && Symbol.toStringTag, l = n && i[Symbol.toStringTag] || i.constructor.name || "Object";
         return l;
       }
     }
-    function he(i) {
+    function be(i) {
       try {
         return ni(i), !1;
       } catch {
@@ -548,16 +548,16 @@ function eo() {
       return "" + i;
     }
     function ai(i) {
-      if (he(i))
-        return v("The provided key is an unsupported type %s. This value must be coerced to a string before before using it here.", me(i)), ni(i);
+      if (be(i))
+        return v("The provided key is an unsupported type %s. This value must be coerced to a string before before using it here.", he(i)), ni(i);
     }
-    var li = M.ReactCurrentOwner, be = {
+    var li = M.ReactCurrentOwner, ve = {
       key: !0,
       ref: !0,
       __self: !0,
       __source: !0
     }, si, ci;
-    function ve(i) {
+    function ye(i) {
       if (rt.call(i, "ref")) {
         var n = Object.getOwnPropertyDescriptor(i, "ref").get;
         if (n && n.isReactWarning)
@@ -565,7 +565,7 @@ function eo() {
       }
       return i.ref !== void 0;
     }
-    function ye(i) {
+    function we(i) {
       if (rt.call(i, "key")) {
         var n = Object.getOwnPropertyDescriptor(i, "key").get;
         if (n && n.isReactWarning)
@@ -573,10 +573,10 @@ function eo() {
       }
       return i.key !== void 0;
     }
-    function we(i, n) {
+    function ke(i, n) {
       typeof i.ref == "string" && li.current;
     }
-    function ke(i, n) {
+    function Se(i, n) {
       {
         var l = function() {
           si || (si = !0, v("%s: `key` is not a prop. Trying to access it will result in `undefined` being returned. If you need to access the same value within the child component, you should pass it as a different prop. (https://reactjs.org/link/special-props)", n));
@@ -587,7 +587,7 @@ function eo() {
         });
       }
     }
-    function Se(i, n) {
+    function Ee(i, n) {
       {
         var l = function() {
           ci || (ci = !0, v("%s: `ref` is not a prop. Trying to access it will result in `undefined` being returned. If you need to access the same value within the child component, you should pass it as a different prop. (https://reactjs.org/link/special-props)", n));
@@ -598,7 +598,7 @@ function eo() {
         });
       }
     }
-    var Ee = function(i, n, l, u, m, b, p) {
+    var xe = function(i, n, l, u, m, b, p) {
       var d = {
         // This tag allows us to uniquely identify this as a React Element
         $$typeof: e,
@@ -627,12 +627,12 @@ function eo() {
         value: m
       }), Object.freeze && (Object.freeze(d.props), Object.freeze(d)), d;
     };
-    function xe(i, n, l, u, m) {
+    function Pe(i, n, l, u, m) {
       {
         var b, p = {}, d = null, P = null;
-        l !== void 0 && (ai(l), d = "" + l), ye(n) && (ai(n.key), d = "" + n.key), ve(n) && (P = n.ref, we(n, m));
+        l !== void 0 && (ai(l), d = "" + l), we(n) && (ai(n.key), d = "" + n.key), ye(n) && (P = n.ref, ke(n, m));
         for (b in n)
-          rt.call(n, b) && !be.hasOwnProperty(b) && (p[b] = n[b]);
+          rt.call(n, b) && !ve.hasOwnProperty(b) && (p[b] = n[b]);
         if (i && i.defaultProps) {
           var y = i.defaultProps;
           for (b in y)
@@ -640,9 +640,9 @@ function eo() {
         }
         if (d || P) {
           var w = typeof i == "function" ? i.displayName || i.name || "Unknown" : i;
-          d && ke(p, w), P && Se(p, w);
+          d && Se(p, w), P && Ee(p, w);
         }
-        return Ee(i, d, P, m, u, li.current, p);
+        return xe(i, d, P, m, u, li.current, p);
       }
     }
     var $t = M.ReactCurrentOwner, ui = M.ReactDebugCurrentFrame;
@@ -670,11 +670,11 @@ Check the render method of \`` + i + "`.";
         return "";
       }
     }
-    function Pe(i) {
+    function De(i) {
       return "";
     }
     var di = {};
-    function De(i) {
+    function Re(i) {
       {
         var n = fi();
         if (!n) {
@@ -691,7 +691,7 @@ Check the top-level render call using <` + l + ">.");
         if (!i._store || i._store.validated || i.key != null)
           return;
         i._store.validated = !0;
-        var l = De(n);
+        var l = Re(n);
         if (di[l])
           return;
         di[l] = !0;
@@ -718,7 +718,7 @@ Check the top-level render call using <` + l + ">.");
         }
       }
     }
-    function Re(i) {
+    function _e(i) {
       {
         var n = i.type;
         if (n == null || typeof n == "string")
@@ -734,7 +734,7 @@ Check the top-level render call using <` + l + ">.");
           return;
         if (l) {
           var u = I(n);
-          pe(l, i.props, "prop", u, i);
+          ge(l, i.props, "prop", u, i);
         } else if (n.PropTypes !== void 0 && !Tt) {
           Tt = !0;
           var m = I(n);
@@ -743,7 +743,7 @@ Check the top-level render call using <` + l + ">.");
         typeof n.getDefaultProps == "function" && !n.getDefaultProps.isReactClassApproved && v("getDefaultProps is only used on classic React.createClass definitions. Use a static property named `defaultProps` instead.");
       }
     }
-    function _e(i) {
+    function Ce(i) {
       {
         for (var n = Object.keys(i.props), l = 0; l < n.length; l++) {
           var u = n[l];
@@ -758,16 +758,16 @@ Check the top-level render call using <` + l + ">.");
     var mi = {};
     function hi(i, n, l, u, m, b) {
       {
-        var p = ae(i);
+        var p = le(i);
         if (!p) {
           var d = "";
           (i === void 0 || typeof i == "object" && i !== null && Object.keys(i).length === 0) && (d += " You likely forgot to export your component from the file it's defined in, or you might have mixed up default and named imports.");
-          var P = Pe();
+          var P = De();
           P ? d += P : d += fi();
           var y;
           i === null ? y = "null" : At(i) ? y = "array" : i !== void 0 && i.$$typeof === e ? (y = "<" + (I(i.type) || "Unknown") + " />", d = " Did you accidentally export a JSX literal instead of a component?") : y = typeof i, v("React.jsx: type is invalid -- expected a string (for built-in components) or a class/function (for composite components) but got: %s.%s", y, d);
         }
-        var w = xe(i, n, l, m, b);
+        var w = Pe(i, n, l, m, b);
         if (w == null)
           return w;
         if (p) {
@@ -784,34 +784,34 @@ Check the top-level render call using <` + l + ">.");
               gi(C, i);
         }
         if (rt.call(n, "key")) {
-          var q = I(i), D = Object.keys(n).filter(function(Me) {
-            return Me !== "key";
+          var q = I(i), D = Object.keys(n).filter(function(Ie) {
+            return Ie !== "key";
           }), Mt = D.length > 0 ? "{key: someKey, " + D.join(": ..., ") + ": ...}" : "{key: someKey}";
           if (!mi[q + Mt]) {
-            var Oe = D.length > 0 ? "{" + D.join(": ..., ") + ": ...}" : "{}";
+            var Me = D.length > 0 ? "{" + D.join(": ..., ") + ": ...}" : "{}";
             v(`A props object containing a "key" prop is being spread into JSX:
   let props = %s;
   <%s {...props} />
 React keys must be passed directly to JSX without using spread:
   let props = %s;
-  <%s key={someKey} {...props} />`, Mt, q, Oe, q), mi[q + Mt] = !0;
+  <%s key={someKey} {...props} />`, Mt, q, Me, q), mi[q + Mt] = !0;
           }
         }
-        return i === r ? _e(w) : Re(w), w;
+        return i === r ? Ce(w) : _e(w), w;
       }
     }
-    function Ce(i, n, l) {
+    function Ae(i, n, l) {
       return hi(i, n, l, !0);
     }
-    function Ae(i, n, l) {
+    function $e(i, n, l) {
       return hi(i, n, l, !1);
     }
-    var $e = Ae, Te = Ce;
-    nt.Fragment = r, nt.jsx = $e, nt.jsxs = Te;
+    var Te = $e, Oe = Ae;
+    nt.Fragment = r, nt.jsx = Te, nt.jsxs = Oe;
   }(), nt;
 }
-Oi.exports = eo();
-var R = Oi.exports;
+Mi.exports = eo();
+var R = Mi.exports;
 const bt = [
   "ti ti-plus",
   "ti ti-minus",
@@ -1821,13 +1821,13 @@ function oo(t) {
   const o = e.length > 50 ? e.slice(0, 50) : e;
   return o.length < 2 ? bt : bt.filter((r) => r.replace("ti ti-", "").includes(o));
 }
-const ro = window.React, { useState: no, useRef: ao, useEffect: vi, useCallback: lo } = ro;
+const ro = window.React, { useState: no, useRef: ao, useEffect: yi, useCallback: lo } = ro;
 function so({ selectedIcon: t, onSelect: e, onClose: o }) {
   const [r, a] = no(""), s = ao(null);
-  vi(() => {
+  yi(() => {
     var c;
     (c = s.current) == null || c.focus();
-  }, []), vi(() => {
+  }, []), yi(() => {
     const c = (h) => {
       h.key === "Escape" && o();
     };
@@ -1904,26 +1904,26 @@ function so({ selectedIcon: t, onSelect: e, onClose: o }) {
 }
 const co = window.React;
 let lt = null, T = null, st = null, N = null;
-const wt = /* @__PURE__ */ new Map(), yi = 22, uo = 14, fo = 6;
+const wt = /* @__PURE__ */ new Map(), wi = 22, uo = 14, fo = 6;
 function po() {
   const t = document.querySelector(".orca-panels-container") || document.body;
   lt = new MutationObserver((r) => {
     const a = document.querySelector(".orca-modal-overlay"), s = a == null ? void 0 : a.querySelector(".orca-settings");
-    a && s && getComputedStyle(a).display !== "none" ? T || wi(s) : T && Ii();
+    a && s && getComputedStyle(a).display !== "none" ? T || ki(s) : T && Ni();
   }), lt.observe(t, { childList: !0, subtree: !0 });
   const e = document.querySelector(".orca-modal-overlay"), o = e == null ? void 0 : e.querySelector(".orca-settings");
-  e && o && getComputedStyle(e).display !== "none" && wi(o);
+  e && o && getComputedStyle(e).display !== "none" && ki(o);
 }
-function wi(t) {
-  T && T.disconnect(), ki(t);
+function ki(t) {
+  T && T.disconnect(), Si(t);
   let e = null;
   T = new MutationObserver(() => {
     e != null && cancelAnimationFrame(e), e = requestAnimationFrame(() => {
-      ki(t), e = null;
+      Si(t), e = null;
     });
   }), T.observe(t, { childList: !0, subtree: !0 });
 }
-function ki(t) {
+function Si(t) {
   const e = t.querySelectorAll(".item-horizontal, .item-vertical");
   for (const o of e) {
     const r = o;
@@ -1934,7 +1934,7 @@ function ki(t) {
 function go(t) {
   t.dataset.pinProcessed = "true";
   const e = ze(t);
-  e && Ci(e) && Mi(t, e);
+  e && Ai(e) && Ii(t, e);
 }
 function mo(t) {
   var g, c, h;
@@ -1967,10 +1967,10 @@ function mo(t) {
       pluginName: r,
       key: et
     };
-    Ci(dt) && Mi(_, dt);
+    Ai(dt) && Ii(_, dt);
   }
 }
-function Mi(t, e) {
+function Ii(t, e) {
   const o = to(e.section, e.title, e.isPlugin, e.pluginName), r = It(o), a = t.querySelector(".title"), s = a == null ? void 0 : a.querySelector(`[data-padd-mount="${o}"]`);
   if (s) {
     const c = wt.get(o);
@@ -1986,8 +1986,8 @@ function Mi(t, e) {
 }
 function kt(t, e, o, r, a) {
   const s = co.createElement, f = { current: null }, g = {
-    width: `${yi}px`,
-    height: `${yi}px`,
+    width: `${wi}px`,
+    height: `${wi}px`,
     padding: 0,
     display: "inline-flex",
     alignItems: "center",
@@ -2042,7 +2042,7 @@ function ho(t, e, o, r) {
   N = document.createElement("div"), N.id = "settings-pin-icon-picker-mount", N.style.cssText = "position: absolute; z-index: 10000;", a.appendChild(N), st = window.createRoot(N);
   const s = (c) => {
     if (!c) return;
-    const h = He(e), S = {
+    const h = Ke(e), S = {
       id: o,
       icon: c,
       section: e.section,
@@ -2081,7 +2081,7 @@ function ho(t, e, o, r) {
 function Nt() {
   st && (st.unmount(), st = null), N && (N.remove(), N = null);
 }
-function Ii() {
+function Ni() {
   T && (T.disconnect(), T = null), wt.forEach((t) => {
     try {
       t.unmount();
@@ -2092,7 +2092,7 @@ function Ii() {
   }), Nt();
 }
 function bo() {
-  Ii(), lt && (lt.disconnect(), lt = null);
+  Ni(), lt && (lt.disconnect(), lt = null);
 }
 const vo = window.React;
 let Z = () => !1;
@@ -2101,8 +2101,8 @@ function yo(t) {
 }
 function wo(t) {
   return (e, o) => {
-    const r = vo.createElement, a = Si(t), s = (f) => {
-      const c = !Si(t);
+    const r = vo.createElement, a = Ei(t), s = (f) => {
+      const c = !Ei(t);
       ko(t, c);
     };
     return r(
@@ -2122,7 +2122,7 @@ function wo(t) {
     );
   };
 }
-function Si(t) {
+function Ei(t) {
   var o;
   if (t.isPlugin && t.pluginName) {
     const r = (o = orca.state.plugins) == null ? void 0 : o[t.pluginName];
@@ -2156,32 +2156,32 @@ function ko(t, e) {
       );
   }
 }
-function Ni(t) {
+function Li(t) {
   const e = `padd.${t.id}`;
   orca.editorSidetools.registerEditorSidetool(e, {
     render: wo(t)
   }), Z() && console.debug(`[PADD] 已注册侧边栏工具: ${e}`);
 }
-function Li(t) {
+function ji(t) {
   const e = `padd.${t.id}`;
   orca.editorSidetools.unregisterEditorSidetool(e), Z() && console.debug(`[PADD] 已注销侧边栏工具: ${e}`);
 }
-const k = "orca-lcars-width-handle", St = "orca-lcars-width-handle-left", Lt = "orca-lcars-width-handle-right", j = "orca-lcars-editor-width", ji = "lcars-editor-width", Et = "lcars-debug-panel", So = 20, Ei = 10, Eo = 2, jt = 52, zi = 1.5, xi = 10;
+const k = "orca-lcars-width-handle", St = "orca-lcars-width-handle-left", Lt = "orca-lcars-width-handle-right", j = "orca-lcars-editor-width", zi = "lcars-editor-width", Et = "lcars-debug-panel", So = 20, xi = 10, Eo = 2, jt = 52, qi = 1.5, Pi = 10;
 let qt = () => !1;
 function xo(t) {
   qt = t;
 }
-const qi = 0, Po = 85, xt = 0;
-let Ft, G = !1, E = xt, Y = !1, Fi = 0, Wi = 0, Bi = 1, L = null, Q = null, vt = !1, ct = null, V = null, F = null;
+const Fi = 0, Po = 85, xt = 0;
+let Ft, H = !1, E = xt, Y = !1, Wi = 0, Bi = 0, Vi = 1, L = null, Q = null, vt = !1, ct = null, V = null, F = null;
 function Do(t) {
   Ft = t, Ao(), zo(), Io(), Lo();
 }
 function Ro() {
-  G = !1, tt(), No(), jo(), qo(), Bt(), Vt(), $o(), ut();
+  H = !1, tt(), No(), jo(), qo(), Bt(), Vt(), $o(), ut();
 }
-function Vi(t, e) {
-  const o = G !== t, r = E !== e;
-  G = t, E = Dt(e), (o || r) && tt();
+function Ki(t, e) {
+  const o = H !== t, r = E !== e;
+  H = t, E = Dt(e), (o || r) && tt();
 }
 function _o() {
   return E;
@@ -2201,7 +2201,7 @@ async function Co() {
 function ft() {
   return !!document.querySelector(".orca-panel.orca-wide");
 }
-function H() {
+function K() {
   const t = [];
   return document.querySelectorAll(".orca-block-editor").forEach((e) => {
     e.getBoundingClientRect().width > 0 && t.push(e);
@@ -2233,13 +2233,13 @@ function Wt(t) {
   }
   return null;
 }
-function Hi(t, e, o) {
+function Gi(t, e, o) {
   if (t <= 0)
     return { side: e.side, editor: e.editor, post: e.post };
-  const r = t / 100, s = 1 - Ki(o) * zi / e.post, f = Math.min(r, s), g = e.side * (1 - f), c = e.post * (1 - f), h = e.total - g - c;
+  const r = t / 100, s = 1 - Hi(o) * qi / e.post, f = Math.min(r, s), g = e.side * (1 - f), c = e.post * (1 - f), h = e.total - g - c;
   return { side: g, editor: h, post: c };
 }
-function Ki(t) {
+function Hi(t) {
   const e = t.querySelector(".orca-block-editor-go-btns");
   return e && Math.ceil(e.getBoundingClientRect().width) || jt;
 }
@@ -2285,8 +2285,8 @@ function Ao() {
       opacity: 0;
       transition: opacity 0.2s ease;
     }
-    .${Lt}::before { right: ${Ei}px; }
-    .${St}::before { left: ${Ei}px; }
+    .${Lt}::before { right: ${xi}px; }
+    .${St}::before { left: ${xi}px; }
 
     .${k}:hover::before,
     .${k}.dragging::before { opacity: 0.8; }
@@ -2327,14 +2327,14 @@ function Ao() {
       white-space: pre;
     }
   `;
-  orca.themes.injectCSS(t, ji);
+  orca.themes.injectCSS(t, zi);
 }
 function $o() {
-  orca.themes.removeCSS(ji);
+  orca.themes.removeCSS(zi);
 }
 function tt() {
-  const t = H(), e = ft();
-  if (!G || e || t.length === 0) {
+  const t = K(), e = ft();
+  if (!H || e || t.length === 0) {
     document.querySelectorAll(".orca-block-editor").forEach((o) => {
       const r = o;
       r.classList.remove(j), r.style.removeProperty("--lcars-side-col"), r.style.removeProperty("--lcars-editor-col"), r.style.removeProperty("--lcars-post-col");
@@ -2347,7 +2347,7 @@ function tt() {
     const r = Wt(o);
     if (!r) return;
     o.classList.add(j);
-    const a = Hi(E, r, o);
+    const a = Gi(E, r, o);
     o.style.setProperty("--lcars-side-col", `${Math.round(a.side)}px`), o.style.setProperty("--lcars-editor-col", `${Math.round(a.editor)}px`), o.style.setProperty("--lcars-post-col", `${Math.round(a.post)}px`);
   }), document.querySelectorAll(".orca-block-editor").forEach((o) => {
     const r = o;
@@ -2355,16 +2355,16 @@ function tt() {
   }), To(), Pt();
 }
 function To() {
-  if (!G || ft()) {
+  if (!H || ft()) {
     Bt();
     return;
   }
-  H().forEach((e) => {
+  K().forEach((e) => {
     const o = e.querySelector(".orca-block-editor-main");
-    o && (Pi(o, Lt), Pi(o, St));
+    o && (Di(o, Lt), Di(o, St));
   });
 }
-function Pi(t, e) {
+function Di(t, e) {
   if (t.querySelector(`:scope > .${e}`)) return;
   const o = document.createElement("div");
   o.className = `${k} ${e}`, qt() && o.classList.add("lcars-debug"), o.title = `编辑区宽度: ${E}%（双击重置）`, t.appendChild(o);
@@ -2390,7 +2390,7 @@ function Pt() {
     Vt();
     return;
   }
-  const t = Mo(), e = H();
+  const t = Mo(), e = K();
   document.querySelectorAll(`.${k}`).length;
   const o = [
     `百分比: ${E}%`,
@@ -2412,11 +2412,11 @@ function Pt() {
 function Io() {
   const t = document.querySelector(".orca-panels-container") || document.body;
   ct = new MutationObserver(() => {
-    G && (Y || (F != null && cancelAnimationFrame(F), F = requestAnimationFrame(() => {
+    H && (Y || (F != null && cancelAnimationFrame(F), F = requestAnimationFrame(() => {
       V && document.querySelectorAll(".orca-block-editor").forEach((o) => {
         V.observe(o);
       }), ft() && ut();
-      const e = H()[0];
+      const e = K()[0];
       e != null && e.dataset.lcarsOrigGrid || ut(), tt(), F = null;
     })));
   }), ct.observe(t, { childList: !0, subtree: !0 });
@@ -2426,7 +2426,7 @@ function No() {
 }
 function Lo() {
   V = new ResizeObserver(() => {
-    !G || Y || (ut(), tt());
+    !H || Y || (ut(), tt());
   }), document.querySelectorAll(".orca-block-editor").forEach((t) => {
     V.observe(t);
   });
@@ -2435,51 +2435,51 @@ function jo() {
   V && (V.disconnect(), V = null);
 }
 function zo() {
-  document.addEventListener("mousedown", Yi, !0), document.addEventListener("mousemove", Ui), document.addEventListener("mouseup", Ht), document.addEventListener("dblclick", Xi, !0), window.addEventListener("blur", Gi);
+  document.addEventListener("mousedown", Ui, !0), document.addEventListener("mousemove", Xi), document.addEventListener("mouseup", Kt), document.addEventListener("dblclick", Ji, !0), window.addEventListener("blur", Yi);
 }
 function qo() {
-  document.removeEventListener("mousedown", Yi, !0), document.removeEventListener("mousemove", Ui), document.removeEventListener("mouseup", Ht), document.removeEventListener("dblclick", Xi, !0), window.removeEventListener("blur", Gi);
+  document.removeEventListener("mousedown", Ui, !0), document.removeEventListener("mousemove", Xi), document.removeEventListener("mouseup", Kt), document.removeEventListener("dblclick", Ji, !0), window.removeEventListener("blur", Yi);
 }
-function Gi() {
-  Y && Ht();
+function Yi() {
+  Y && Kt();
 }
-function Yi(t) {
+function Ui(t) {
   const e = t.target;
   if (!e.classList.contains(k)) return;
   t.preventDefault();
   const o = e.closest(".orca-block-editor");
-  o && (L = Wt(o)), Y = !0, Fi = t.clientX, Wi = E, Bi = e.classList.contains(St) ? -1 : 1, e.classList.add("dragging"), document.body.classList.add("lcars-dragging-active"), o && o.classList.add("lcars-dragging");
+  o && (L = Wt(o)), Y = !0, Wi = t.clientX, Bi = E, Vi = e.classList.contains(St) ? -1 : 1, e.classList.add("dragging"), document.body.classList.add("lcars-dragging-active"), o && o.classList.add("lcars-dragging");
 }
-function Ui(t) {
+function Xi(t) {
   var S;
   if (!Y || !L || ft()) return;
   const e = (L.side + L.post) / 2;
   if (e <= 0) return;
-  const o = (S = t.target) == null ? void 0 : S.closest(".orca-block-editor"), s = (1 - (o ? Ki(o) : jt) * zi / L.post) * 100, c = (t.clientX - Fi) * Bi / e * 100;
-  let h = Math.round((Wi + c) * 10) / 10;
-  h = Math.min(s, Math.max(qi, h)), Math.abs(h - E) >= 0.1 && (E = h, vt = !0, Q == null && (Q = requestAnimationFrame(() => {
+  const o = (S = t.target) == null ? void 0 : S.closest(".orca-block-editor"), s = (1 - (o ? Hi(o) : jt) * qi / L.post) * 100, c = (t.clientX - Wi) * Vi / e * 100;
+  let h = Math.round((Bi + c) * 10) / 10;
+  h = Math.min(s, Math.max(Fi, h)), Math.abs(h - E) >= 0.1 && (E = h, vt = !0, Q == null && (Q = requestAnimationFrame(() => {
     vt && Fo(), vt = !1, Q = null;
   })));
 }
 function Fo() {
-  if (!L || H().length === 0) return;
-  const e = Hi(E, L, H()[0]), o = `${Math.round(e.side)}px`, r = `${Math.round(e.editor)}px`, a = `${Math.round(e.post)}px`;
-  H().forEach((s) => {
+  if (!L || K().length === 0) return;
+  const e = Gi(E, L, K()[0]), o = `${Math.round(e.side)}px`, r = `${Math.round(e.editor)}px`, a = `${Math.round(e.post)}px`;
+  K().forEach((s) => {
     s.style.setProperty("--lcars-side-col", o), s.style.setProperty("--lcars-editor-col", r), s.style.setProperty("--lcars-post-col", a);
   }), Pt();
 }
-function Ht() {
-  Y && (Y = !1, L = null, vt = !1, Q != null && (cancelAnimationFrame(Q), Q = null), E = Dt(Math.round(E * xi) / xi), document.querySelectorAll(`.${k}.dragging`).forEach((t) => t.classList.remove("dragging")), document.body.classList.remove("lcars-dragging-active"), document.querySelectorAll(".lcars-dragging").forEach((t) => t.classList.remove("lcars-dragging")), tt(), Ji());
+function Kt() {
+  Y && (Y = !1, L = null, vt = !1, Q != null && (cancelAnimationFrame(Q), Q = null), E = Dt(Math.round(E * Pi) / Pi), document.querySelectorAll(`.${k}.dragging`).forEach((t) => t.classList.remove("dragging")), document.body.classList.remove("lcars-dragging-active"), document.querySelectorAll(".lcars-dragging").forEach((t) => t.classList.remove("lcars-dragging")), tt(), Zi());
 }
-function Xi(t) {
-  t.target.classList.contains(k) && (t.preventDefault(), E !== xt && (E = xt, tt(), Oo(), Ji()));
+function Ji(t) {
+  t.target.classList.contains(k) && (t.preventDefault(), E !== xt && (E = xt, tt(), Oo(), Zi()));
 }
 function Wo(t) {
   document.querySelectorAll(`.${k}`).forEach((e) => {
     t ? e.classList.add("lcars-debug") : e.classList.remove("lcars-debug");
   }), t ? Pt() : Vt();
 }
-async function Ji() {
+async function Zi() {
   try {
     await orca.plugins.setData(Ft, "editorWidthV2", E);
   } catch (t) {
@@ -2487,82 +2487,84 @@ async function Ji() {
   }
 }
 function Dt(t) {
-  return Math.min(Po, Math.max(qi, t));
+  return Math.min(Po, Math.max(Fi, t));
 }
 const { subscribe: Bo } = window.Valtio;
-let A, yt = null, W = !0, K = !1, at = !1;
-const Vo = {
-  paddEnabled: {
-    label: $("📱 PADD ► Pin Settings to Sidebar ◄"),
-    description: $("Pin boolean settings from the preferences panel to the editor sidebar for one-tap toggling. PADD (Personal Access Display Device) is a handheld terminal from Star Trek."),
-    type: "boolean",
-    defaultValue: !0
-  },
-  editorWidthMode: {
-    label: $("✨ Morphic Field ► Drag to Resize Editor ◄"),
-    description: $("Drag handles to expand the editor width. 0% = original width, drag to limit = fill available space. Double-click handle to reset. Morphic Field is the underlying force of shape-shifting in Star Trek."),
-    type: "boolean",
-    defaultValue: !1
-  },
-  debugMode: {
-    label: $("Debug Mode"),
-    description: $("Enable console logging for setting toggles and show debug panel in editor area."),
-    type: "boolean",
-    defaultValue: !1
-  }
-};
-function Ho() {
-  return K;
+let A, yt = null, W = !0, G = !1, at = !1;
+function Vo() {
+  return {
+    paddEnabled: {
+      label: $("📱 PADD ► Pin Settings to Sidebar ◄"),
+      description: $("Pin boolean settings from the preferences panel to the editor sidebar for one-tap toggling. PADD (Personal Access Display Device) is a handheld terminal from Star Trek."),
+      type: "boolean",
+      defaultValue: !0
+    },
+    editorWidthMode: {
+      label: $("✨ Morphic Field ► Drag to Resize Editor ◄"),
+      description: $("Drag handles to expand the editor width. 0% = original width, drag to limit = fill available space. Double-click handle to reset. Morphic Field is the underlying force of shape-shifting in Star Trek."),
+      type: "boolean",
+      defaultValue: !1
+    },
+    debugMode: {
+      label: $("Debug Mode"),
+      description: $("Enable console logging for setting toggles and show debug panel in editor area."),
+      type: "boolean",
+      defaultValue: !1
+    }
+  };
 }
 function Ko() {
+  return G;
+}
+function Go() {
   return W;
 }
-function Zi() {
-  const t = Ti();
-  for (const e of t)
-    Ni(e);
-  po(), console.log(`[PADD] 功能已启用，${t.length} 个设置已钉选`);
-}
 function Qi() {
-  const t = Ti();
+  const t = Oi();
   for (const e of t)
     Li(e);
+  po(), console.log(`[PADD] 功能已启用，${t.length} 个设置已钉选`);
+}
+function te() {
+  const t = Oi();
+  for (const e of t)
+    ji(e);
   bo(), console.log("[PADD] 功能已禁用");
 }
-function Di() {
+function Ri() {
   var a;
   const t = (a = orca.state.plugins[A]) == null ? void 0 : a.settings, e = (t == null ? void 0 : t.paddEnabled) !== !1, o = !!(t != null && t.debugMode);
-  e !== W && (W = e, console.log(`[PADD] 开关状态变化 → ${W}`), W ? Zi() : Qi());
+  e !== W && (W = e, console.log(`[PADD] 开关状态变化 → ${W}`), W ? Qi() : te());
   const r = !!(t != null && t.editorWidthMode);
-  r !== at && (at = r, console.log(`[LCARS] 编辑区宽度开关 → ${at}`), Vi(at, _o())), o !== K && (K = o, Wo(K));
+  r !== at && (at = r, console.log(`[LCARS] 编辑区宽度开关 → ${at}`), Ki(at, _o())), o !== G && (G = o, Wo(G));
 }
-async function Go(t) {
+async function Ho(t) {
   var e;
-  A = t, Ie(orca.state.locale, { "zh-CN": Ne, en: Le }), console.log(`${A} LCARS 工具箱加载中...`);
+  A = t, Ne(orca.state.locale, { zh: bi, "zh-CN": bi, en: Le }), console.log(`${A} LCARS 工具箱加载中...`);
   try {
-    Ye(A), Ge(() => K), yo(() => K), await Xe(), Do(A);
+    Ye(A), He(() => G), yo(() => G), await Xe(), Do(A);
     const o = await Co();
-    xo(() => K), await orca.plugins.setSettingsSchema(A, Vo);
+    xo(() => G), await orca.plugins.setSettingsSchema(A, Vo());
     const r = orca.state.plugins[A];
     r && (r.settings || (r.settings = {}), r.settings.paddEnabled === void 0 && (r.settings.paddEnabled = !0), r.settings.editorWidthMode === void 0 && (r.settings.editorWidthMode = !1)), Ue((f, g) => {
-      W && (f && Ni(f), g && Li({ id: g }));
+      W && (f && Li(f), g && ji({ id: g }));
     });
     const a = ((e = r == null ? void 0 : r.settings) == null ? void 0 : e.editorWidthMode) === !0;
-    at = a, Vi(a, o), Di();
+    at = a, Ki(a, o), Ri();
     const s = orca.state.plugins[A];
     s && (yt = Bo(s, () => {
-      Di();
-    })), W && Zi(), console.log(`${A} LCARS 工具箱已加载`);
+      Ri();
+    })), W && Qi(), console.log(`${A} LCARS 工具箱已加载`);
   } catch (o) {
     console.error(`${A} 加载失败:`, o);
   }
 }
 async function Yo() {
-  console.log(`${A} LCARS 工具箱卸载中...`), yt && (yt(), yt = null), Ro(), Qi(), console.log(`${A} LCARS 工具箱已卸载`);
+  console.log(`${A} LCARS 工具箱卸载中...`), yt && (yt(), yt = null), Ro(), te(), console.log(`${A} LCARS 工具箱已卸载`);
 }
 export {
-  Ho as isDebugMode,
-  Ko as isPADDEnabled,
-  Go as load,
+  Ko as isDebugMode,
+  Go as isPADDEnabled,
+  Ho as load,
   Yo as unload
 };
