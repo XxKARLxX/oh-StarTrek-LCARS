@@ -1,7 +1,7 @@
 # oh-StarTrek-LCARS
 
-> *"Computer, display user preferences."*  
-> *"Preferences pinned to side panel. Ready for quick access."*
+> 🖥️ *"Computer, display user preferences."*  
+> 📌 *"Preferences pinned to side panel. Ready for quick access."*
 
 Turn Orca Note into a Starfleet terminal. The LCARS toolbox injects starship DNA into your workflow — PADD pins your favorite toggles, Morphic Field reshapes your editing space.
 
