@@ -1,7 +1,7 @@
 # oh-StarTrek-LCARS
 
-> *"Computer, display user preferences."*  
-> *"Preferences pinned to side panel. Ready for quick access."*
+> *「计算机，显示用户偏好。」*
+> *「偏好已钉选至侧面板，随时可用。」*
 
 让虎鲸笔记（Orca Note）化身星际舰队终端。LCARS 工具箱为你的工作流注入星舰基因——PADD 锁定常用开关，变形场重塑编辑空间。
 
