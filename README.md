@@ -5,6 +5,8 @@
 
 让虎鲸笔记（Orca Note）化身星际舰队终端。LCARS 工具箱为你的工作流注入星舰基因——PADD 锁定常用开关，变形场重塑编辑空间。
 
+[English](README_en.md)
+
 ---
 
 ## LCARS 工具箱
