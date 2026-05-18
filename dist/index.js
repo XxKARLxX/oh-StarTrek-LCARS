@@ -2271,8 +2271,8 @@ function Ao() {
       z-index: 10;
       pointer-events: auto;
     }
-    .${Lt} { right: -40px; }
-    .${St} { left: -40px; }
+    .${Lt} { right: -60px; }
+    .${St} { left: -60px; }
 
     .${k}::before {
       content: '';
